@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.31
+ * Model version                  : 1.33
  * Simulink Coder version         : 24.2 (R2024b) 21-Jun-2024
- * C/C++ source code generated on : Tue Nov 18 17:12:39 2025
+ * C/C++ source code generated on : Tue Nov 18 17:53:13 2025
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: AMD->x86-64 (Linux 64)
@@ -332,11 +332,21 @@ void control_step(void)
   boolean_T b_y;
   boolean_T exitg1;
 
-  /* Outport: '<Root>/controlb' incorporates:
-   *  UnitDelay: '<S1>/Unit Delay'
-   */
+  /* Outport: '<Root>/controlb' */
   for (i = 0; i < 6; i++) {
-    rtY.controlb[i] = rtDW.UnitDelay_DSTATE[i];
+    /* UnitDelay: '<S1>/Unit Delay' */
+    rtb_PulseGenerator = rtDW.UnitDelay_DSTATE[i];
+
+    /* Saturate: '<S1>/Saturation' */
+    if (rtb_PulseGenerator > 24.0) {
+      rtY.controlb[i] = 24.0;
+    } else if (rtb_PulseGenerator < -24.0) {
+      rtY.controlb[i] = -24.0;
+    } else {
+      rtY.controlb[i] = rtb_PulseGenerator;
+    }
+
+    /* End of Saturate: '<S1>/Saturation' */
   }
 
   /* End of Outport: '<Root>/controlb' */
