@@ -28,3 +28,5 @@ codegen/
 octave-workspace
 
 *.slxc
+
+*.slx.r2024b

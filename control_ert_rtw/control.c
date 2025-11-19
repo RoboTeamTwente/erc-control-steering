@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.33
+ * Model version                  : 1.35
  * Simulink Coder version         : 24.2 (R2024b) 21-Jun-2024
- * C/C++ source code generated on : Tue Nov 18 17:53:13 2025
+ * C/C++ source code generated on : Wed Nov 19 15:28:25 2025
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: AMD->x86-64 (Linux 64)
@@ -320,197 +320,29 @@ real_T rt_atan2d_snf(real_T u0, real_T u1)
 /* Model step function */
 void control_step(void)
 {
+  __m128d tmp;
+  __m128d tmp_0;
+  __m128d tmp_1;
+  __m128d tmp_2;
   real_T rtb_Sum_l[6];
   real_T y[4];
-  real_T rtb_PulseGenerator;
   real_T rtb_R_L;
   real_T rtb_R_R;
+  real_T rtb_TmpSignalConversionAtSFun_0;
+  real_T rtb_deltaL;
   real_T rtb_deltaR;
   real_T rtb_wheel_speed_LF;
+  real_T rtb_wheel_speed_RB;
   real_T rtb_wheel_speed_RF;
   int32_T i;
   boolean_T b_y;
   boolean_T exitg1;
 
-  /* Outport: '<Root>/controlb' */
-  for (i = 0; i < 6; i++) {
-    /* UnitDelay: '<S1>/Unit Delay' */
-    rtb_PulseGenerator = rtDW.UnitDelay_DSTATE[i];
-
-    /* Saturate: '<S1>/Saturation' */
-    if (rtb_PulseGenerator > 24.0) {
-      rtY.controlb[i] = 24.0;
-    } else if (rtb_PulseGenerator < -24.0) {
-      rtY.controlb[i] = -24.0;
-    } else {
-      rtY.controlb[i] = rtb_PulseGenerator;
-    }
-
-    /* End of Saturate: '<S1>/Saturation' */
-  }
-
-  /* End of Outport: '<Root>/controlb' */
-
-  /* DiscretePulseGenerator: '<S1>/Pulse Generator' */
-  rtb_PulseGenerator = ((rtDW.clockTickCounter < 1) && (rtDW.clockTickCounter >=
-    0));
-  if (rtDW.clockTickCounter >= 9) {
-    rtDW.clockTickCounter = 0;
-  } else {
-    rtDW.clockTickCounter++;
-  }
-
-  /* End of DiscretePulseGenerator: '<S1>/Pulse Generator' */
-
-  /* Saturate: '<S1>/Saturation2' incorporates:
-   *  UnitDelay: '<S1>/Unit Delay1'
-   */
-  if (rtDW.UnitDelay1_DSTATE[0] > 1.0) {
-    rtb_deltaR = 1.0;
-  } else if (rtDW.UnitDelay1_DSTATE[0] < -1.0) {
-    rtb_deltaR = -1.0;
-  } else {
-    rtb_deltaR = rtDW.UnitDelay1_DSTATE[0];
-  }
-
-  /* Signum: '<S1>/Sign' incorporates:
-   *  Gain: '<S1>/Gain'
-   */
-  if (rtIsNaN(-rtb_deltaR)) {
-    rtb_R_L = (rtNaN);
-  } else if (-rtb_deltaR < 0.0) {
-    /* Saturate: '<S1>/Saturation1' */
-    rtb_R_L = 0.0;
-  } else {
-    rtb_R_L = (-rtb_deltaR > 0.0);
-  }
-
-  /* Outport: '<Root>/pwmrev' incorporates:
-   *  Gain: '<S1>/Gain1'
-   *  Saturate: '<S1>/Saturation1'
-   */
-  rtY.pwmrev[0] = 5.0 * rtb_R_L;
-
-  /* Outport: '<Root>/pwnenable' incorporates:
-   *  Abs: '<S1>/Abs'
-   *  Gain: '<S1>/Gain2'
-   *  Product: '<S1>/Product'
-   */
-  rtY.pwnenable[0] = rtb_PulseGenerator * fabs(rtb_deltaR) * 5.0;
-
-  /* Saturate: '<S1>/Saturation2' incorporates:
-   *  UnitDelay: '<S1>/Unit Delay1'
-   */
-  if (rtDW.UnitDelay1_DSTATE[1] > 1.0) {
-    rtb_deltaR = 1.0;
-  } else if (rtDW.UnitDelay1_DSTATE[1] < -1.0) {
-    rtb_deltaR = -1.0;
-  } else {
-    rtb_deltaR = rtDW.UnitDelay1_DSTATE[1];
-  }
-
-  /* Signum: '<S1>/Sign' incorporates:
-   *  Gain: '<S1>/Gain'
-   */
-  if (rtIsNaN(-rtb_deltaR)) {
-    rtb_R_L = (rtNaN);
-  } else if (-rtb_deltaR < 0.0) {
-    /* Saturate: '<S1>/Saturation1' */
-    rtb_R_L = 0.0;
-  } else {
-    rtb_R_L = (-rtb_deltaR > 0.0);
-  }
-
-  /* Outport: '<Root>/pwmrev' incorporates:
-   *  Gain: '<S1>/Gain1'
-   *  Saturate: '<S1>/Saturation1'
-   */
-  rtY.pwmrev[1] = 5.0 * rtb_R_L;
-
-  /* Outport: '<Root>/pwnenable' incorporates:
-   *  Abs: '<S1>/Abs'
-   *  Gain: '<S1>/Gain2'
-   *  Product: '<S1>/Product'
-   */
-  rtY.pwnenable[1] = rtb_PulseGenerator * fabs(rtb_deltaR) * 5.0;
-
-  /* Saturate: '<S1>/Saturation2' incorporates:
-   *  UnitDelay: '<S1>/Unit Delay1'
-   */
-  if (rtDW.UnitDelay1_DSTATE[2] > 1.0) {
-    rtb_deltaR = 1.0;
-  } else if (rtDW.UnitDelay1_DSTATE[2] < -1.0) {
-    rtb_deltaR = -1.0;
-  } else {
-    rtb_deltaR = rtDW.UnitDelay1_DSTATE[2];
-  }
-
-  /* Signum: '<S1>/Sign' incorporates:
-   *  Gain: '<S1>/Gain'
-   */
-  if (rtIsNaN(-rtb_deltaR)) {
-    rtb_R_L = (rtNaN);
-  } else if (-rtb_deltaR < 0.0) {
-    /* Saturate: '<S1>/Saturation1' */
-    rtb_R_L = 0.0;
-  } else {
-    rtb_R_L = (-rtb_deltaR > 0.0);
-  }
-
-  /* Outport: '<Root>/pwmrev' incorporates:
-   *  Gain: '<S1>/Gain1'
-   *  Saturate: '<S1>/Saturation1'
-   */
-  rtY.pwmrev[2] = 5.0 * rtb_R_L;
-
-  /* Outport: '<Root>/pwnenable' incorporates:
-   *  Abs: '<S1>/Abs'
-   *  Gain: '<S1>/Gain2'
-   *  Product: '<S1>/Product'
-   */
-  rtY.pwnenable[2] = rtb_PulseGenerator * fabs(rtb_deltaR) * 5.0;
-
-  /* Saturate: '<S1>/Saturation2' incorporates:
-   *  UnitDelay: '<S1>/Unit Delay1'
-   */
-  if (rtDW.UnitDelay1_DSTATE[3] > 1.0) {
-    rtb_deltaR = 1.0;
-  } else if (rtDW.UnitDelay1_DSTATE[3] < -1.0) {
-    rtb_deltaR = -1.0;
-  } else {
-    rtb_deltaR = rtDW.UnitDelay1_DSTATE[3];
-  }
-
-  /* Signum: '<S1>/Sign' incorporates:
-   *  Gain: '<S1>/Gain'
-   */
-  if (rtIsNaN(-rtb_deltaR)) {
-    rtb_R_L = (rtNaN);
-  } else if (-rtb_deltaR < 0.0) {
-    /* Saturate: '<S1>/Saturation1' */
-    rtb_R_L = 0.0;
-  } else {
-    rtb_R_L = (-rtb_deltaR > 0.0);
-  }
-
-  /* Outport: '<Root>/pwmrev' incorporates:
-   *  Gain: '<S1>/Gain1'
-   *  Saturate: '<S1>/Saturation1'
-   */
-  rtY.pwmrev[3] = 5.0 * rtb_R_L;
-
-  /* Outport: '<Root>/pwnenable' incorporates:
-   *  Abs: '<S1>/Abs'
-   *  Gain: '<S1>/Gain2'
-   *  Product: '<S1>/Product'
-   */
-  rtY.pwnenable[3] = rtb_PulseGenerator * fabs(rtb_deltaR) * 5.0;
-
-  /* MATLAB Function: '<S3>/MATLAB Function2' incorporates:
-   *  Constant: '<S3>/Constant4'
-   *  Constant: '<S56>/Constant'
+  /* MATLAB Function: '<S1>/MATLAB Function2' incorporates:
+   *  Constant: '<S1>/Constant4'
+   *  Constant: '<S2>/Constant'
    *  Inport: '<Root>/dist2goal'
-   *  RelationalOperator: '<S56>/Compare'
+   *  RelationalOperator: '<S2>/Compare'
    */
   if (!rtDW.v_not_empty) {
     rtDW.v = 0.3;
@@ -530,42 +362,46 @@ void control_step(void)
     rtDW.v = 0.0;
   }
 
-  /* MATLAB Function: '<S3>/MATLAB Function' incorporates:
+  /* MATLAB Function: '<S1>/MATLAB Function' incorporates:
    *  Constant: '<S1>/Constant1'
    *  Constant: '<S1>/Constant7'
-   *  Inport: '<Root>/R'
    *  Inport: '<Root>/alpha'
+   *  Inport: '<Root>/dist2goal'
    */
+  rtb_wheel_speed_RB = 360.0 * rtU.dist2goal / (6.2831853071795862 * fabs
+    (rtU.alpha));
   if (rtU.alpha < 0.0) {
-    rtb_PulseGenerator = rt_atan2d_snf(0.57, rtU.R + 0.185) * 57.295779513082323;
-    rtb_deltaR = rt_atan2d_snf(0.57, rtU.R - 0.185) * 57.295779513082323;
-    rtb_R_L = rtU.R + 0.185;
-    rtb_R_R = rtU.R - 0.185;
+    rtb_deltaL = rt_atan2d_snf(0.57, rtb_wheel_speed_RB + 0.185) *
+      57.295779513082323;
+    rtb_deltaR = rt_atan2d_snf(0.57, rtb_wheel_speed_RB - 0.185) *
+      57.295779513082323;
+    rtb_R_L = rtb_wheel_speed_RB + 0.185;
+    rtb_R_R = rtb_wheel_speed_RB - 0.185;
   } else if (rtU.alpha > 0.0) {
-    rtb_PulseGenerator = -(rt_atan2d_snf(0.57, rtU.R - 0.185) *
-      57.295779513082323);
-    rtb_deltaR = -(rt_atan2d_snf(0.57, rtU.R + 0.185) * 57.295779513082323);
-    rtb_R_L = rtU.R - 0.185;
-    rtb_R_R = rtU.R + 0.185;
+    rtb_deltaL = -(rt_atan2d_snf(0.57, rtb_wheel_speed_RB - 0.185) *
+                   57.295779513082323);
+    rtb_deltaR = -(rt_atan2d_snf(0.57, rtb_wheel_speed_RB + 0.185) *
+                   57.295779513082323);
+    rtb_R_L = rtb_wheel_speed_RB - 0.185;
+    rtb_R_R = rtb_wheel_speed_RB + 0.185;
   } else {
-    rtb_PulseGenerator = 0.0;
+    rtb_deltaL = 0.0;
     rtb_deltaR = 0.0;
-    rtb_R_L = rtU.R;
-    rtb_R_R = rtU.R;
+    rtb_R_L = rtb_wheel_speed_RB;
+    rtb_R_R = rtb_wheel_speed_RB;
   }
 
-  /* MATLAB Function: '<S3>/MATLAB Function1' incorporates:
+  /* MATLAB Function: '<S1>/MATLAB Function1' incorporates:
+   *  Constant: '<S1>/Constant2'
    *  Constant: '<S1>/Constant7'
-   *  Constant: '<S3>/Constant2'
-   *  Gain: '<S3>/Gain4'
-   *  Gain: '<S3>/Gain5'
-   *  Inport: '<Root>/R'
-   *  MATLAB Function: '<S3>/MATLAB Function'
-   *  MATLAB Function: '<S3>/MATLAB Function2'
-   *  SignalConversion generated from: '<S58>/ SFunction '
+   *  Gain: '<S1>/Gain4'
+   *  Gain: '<S1>/Gain5'
+   *  MATLAB Function: '<S1>/MATLAB Function'
+   *  MATLAB Function: '<S1>/MATLAB Function2'
+   *  SignalConversion generated from: '<S4>/ SFunction '
    */
-  y[0] = fabs(rtb_PulseGenerator);
-  y[1] = fabs(-rtb_PulseGenerator);
+  y[0] = fabs(rtb_deltaL);
+  y[1] = fabs(-rtb_deltaL);
   y[2] = fabs(rtb_deltaR);
   y[3] = fabs(-rtb_deltaR);
   b_y = false;
@@ -582,29 +418,21 @@ void control_step(void)
 
   if (b_y) {
     rtb_wheel_speed_LF = sqrt(rtb_R_L * rtb_R_L + 0.32489999999999997) * (rtDW.v
-      / 0.1) / rtU.R;
-    rtb_R_L = rtDW.v * rtb_R_L / (rtU.R * 0.1);
+      / 0.1) / rtb_wheel_speed_RB;
+    rtb_R_L = rtDW.v * rtb_R_L / (rtb_wheel_speed_RB * 0.1);
     rtb_wheel_speed_RF = sqrt(rtb_R_R * rtb_R_R + 0.32489999999999997) * (rtDW.v
-      / 0.1) / rtU.R;
-    rtb_R_R = rtDW.v * rtb_R_R / (rtU.R * 0.1);
+      / 0.1) / rtb_wheel_speed_RB;
+    rtb_R_R = rtDW.v * rtb_R_R / (rtb_wheel_speed_RB * 0.1);
+    rtb_wheel_speed_RB = rtb_wheel_speed_RF;
   } else {
     rtb_wheel_speed_LF = rtDW.v / 0.1;
     rtb_R_L = rtb_wheel_speed_LF;
     rtb_wheel_speed_RF = rtb_wheel_speed_LF;
     rtb_R_R = rtb_wheel_speed_LF;
+    rtb_wheel_speed_RB = rtb_wheel_speed_LF;
   }
 
-  /* End of MATLAB Function: '<S3>/MATLAB Function1' */
-
-  /* Sum: '<S1>/Sum' incorporates:
-   *  Inport: '<Root>/actspeed'
-   */
-  _mm_storeu_pd(&rtb_Sum_l[0], _mm_sub_pd(_mm_set_pd(rtb_R_L, rtb_wheel_speed_LF),
-    _mm_loadu_pd(&rtU.actspeed[0])));
-  _mm_storeu_pd(&rtb_Sum_l[2], _mm_sub_pd(_mm_set_pd(rtb_wheel_speed_RF,
-    rtb_wheel_speed_LF), _mm_loadu_pd(&rtU.actspeed[2])));
-  _mm_storeu_pd(&rtb_Sum_l[4], _mm_sub_pd(_mm_set_pd(rtb_wheel_speed_RF, rtb_R_R),
-    _mm_loadu_pd(&rtU.actspeed[4])));
+  /* End of MATLAB Function: '<S1>/MATLAB Function1' */
 
   /* Outport: '<Root>/desspeed' */
   rtY.desspeed[0] = rtb_wheel_speed_LF;
@@ -612,68 +440,250 @@ void control_step(void)
   rtY.desspeed[2] = rtb_wheel_speed_LF;
   rtY.desspeed[3] = rtb_wheel_speed_RF;
   rtY.desspeed[4] = rtb_R_R;
-  rtY.desspeed[5] = rtb_wheel_speed_RF;
+  rtY.desspeed[5] = rtb_wheel_speed_RB;
+
+  /* Outport: '<Root>/controlb' */
+  for (i = 0; i < 6; i++) {
+    /* UnitDelay: '<S1>/Unit Delay' */
+    rtb_wheel_speed_RB = rtDW.UnitDelay_DSTATE[i];
+
+    /* Saturate: '<S1>/Saturation' */
+    if (rtb_wheel_speed_RB > 24.0) {
+      rtY.controlb[i] = 24.0;
+    } else if (rtb_wheel_speed_RB < -24.0) {
+      rtY.controlb[i] = -24.0;
+    } else {
+      rtY.controlb[i] = rtb_wheel_speed_RB;
+    }
+
+    /* End of Saturate: '<S1>/Saturation' */
+  }
+
+  /* End of Outport: '<Root>/controlb' */
 
   /* Outport: '<Root>/desang' incorporates:
-   *  Gain: '<S3>/Gain4'
-   *  Gain: '<S3>/Gain5'
+   *  Gain: '<S1>/Gain4'
+   *  Gain: '<S1>/Gain5'
    */
-  rtY.desang[0] = rtb_PulseGenerator;
-  rtY.desang[1] = -rtb_PulseGenerator;
+  rtY.desang[0] = rtb_deltaL;
+  rtY.desang[1] = -rtb_deltaL;
   rtY.desang[2] = rtb_deltaR;
   rtY.desang[3] = -rtb_deltaR;
 
+  /* DiscretePulseGenerator: '<S1>/Pulse Generator' */
+  rtb_wheel_speed_RB = ((rtDW.clockTickCounter < 1) && (rtDW.clockTickCounter >=
+    0));
+  if (rtDW.clockTickCounter >= 9) {
+    rtDW.clockTickCounter = 0;
+  } else {
+    rtDW.clockTickCounter++;
+  }
+
+  /* End of DiscretePulseGenerator: '<S1>/Pulse Generator' */
+
+  /* Saturate: '<S1>/Saturation2' incorporates:
+   *  UnitDelay: '<S1>/Unit Delay1'
+   */
+  if (rtDW.UnitDelay1_DSTATE[0] > 1.0) {
+    rtb_TmpSignalConversionAtSFun_0 = 1.0;
+  } else if (rtDW.UnitDelay1_DSTATE[0] < -1.0) {
+    rtb_TmpSignalConversionAtSFun_0 = -1.0;
+  } else {
+    rtb_TmpSignalConversionAtSFun_0 = rtDW.UnitDelay1_DSTATE[0];
+  }
+
+  /* Outport: '<Root>/pwnenable' incorporates:
+   *  Abs: '<S1>/Abs'
+   *  Gain: '<S1>/Gain2'
+   *  Product: '<S1>/Product'
+   */
+  rtY.pwnenable[0] = rtb_wheel_speed_RB * fabs(rtb_TmpSignalConversionAtSFun_0) *
+    5.0;
+
+  /* Signum: '<S1>/Sign' incorporates:
+   *  Gain: '<S1>/Gain'
+   */
+  if (rtIsNaN(-rtb_TmpSignalConversionAtSFun_0)) {
+    rtb_TmpSignalConversionAtSFun_0 = (rtNaN);
+  } else if (-rtb_TmpSignalConversionAtSFun_0 < 0.0) {
+    /* Saturate: '<S1>/Saturation1' */
+    rtb_TmpSignalConversionAtSFun_0 = 0.0;
+  } else {
+    rtb_TmpSignalConversionAtSFun_0 = (-rtb_TmpSignalConversionAtSFun_0 > 0.0);
+  }
+
+  /* Outport: '<Root>/pwmrev' incorporates:
+   *  Gain: '<S1>/Gain1'
+   *  Saturate: '<S1>/Saturation1'
+   */
+  rtY.pwmrev[0] = 5.0 * rtb_TmpSignalConversionAtSFun_0;
+
+  /* Saturate: '<S1>/Saturation2' incorporates:
+   *  UnitDelay: '<S1>/Unit Delay1'
+   */
+  if (rtDW.UnitDelay1_DSTATE[1] > 1.0) {
+    rtb_TmpSignalConversionAtSFun_0 = 1.0;
+  } else if (rtDW.UnitDelay1_DSTATE[1] < -1.0) {
+    rtb_TmpSignalConversionAtSFun_0 = -1.0;
+  } else {
+    rtb_TmpSignalConversionAtSFun_0 = rtDW.UnitDelay1_DSTATE[1];
+  }
+
+  /* Outport: '<Root>/pwnenable' incorporates:
+   *  Abs: '<S1>/Abs'
+   *  Gain: '<S1>/Gain2'
+   *  Product: '<S1>/Product'
+   */
+  rtY.pwnenable[1] = rtb_wheel_speed_RB * fabs(rtb_TmpSignalConversionAtSFun_0) *
+    5.0;
+
+  /* Signum: '<S1>/Sign' incorporates:
+   *  Gain: '<S1>/Gain'
+   */
+  if (rtIsNaN(-rtb_TmpSignalConversionAtSFun_0)) {
+    rtb_TmpSignalConversionAtSFun_0 = (rtNaN);
+  } else if (-rtb_TmpSignalConversionAtSFun_0 < 0.0) {
+    /* Saturate: '<S1>/Saturation1' */
+    rtb_TmpSignalConversionAtSFun_0 = 0.0;
+  } else {
+    rtb_TmpSignalConversionAtSFun_0 = (-rtb_TmpSignalConversionAtSFun_0 > 0.0);
+  }
+
+  /* Outport: '<Root>/pwmrev' incorporates:
+   *  Gain: '<S1>/Gain1'
+   *  Saturate: '<S1>/Saturation1'
+   */
+  rtY.pwmrev[1] = 5.0 * rtb_TmpSignalConversionAtSFun_0;
+
+  /* Saturate: '<S1>/Saturation2' incorporates:
+   *  UnitDelay: '<S1>/Unit Delay1'
+   */
+  if (rtDW.UnitDelay1_DSTATE[2] > 1.0) {
+    rtb_TmpSignalConversionAtSFun_0 = 1.0;
+  } else if (rtDW.UnitDelay1_DSTATE[2] < -1.0) {
+    rtb_TmpSignalConversionAtSFun_0 = -1.0;
+  } else {
+    rtb_TmpSignalConversionAtSFun_0 = rtDW.UnitDelay1_DSTATE[2];
+  }
+
+  /* Outport: '<Root>/pwnenable' incorporates:
+   *  Abs: '<S1>/Abs'
+   *  Gain: '<S1>/Gain2'
+   *  Product: '<S1>/Product'
+   */
+  rtY.pwnenable[2] = rtb_wheel_speed_RB * fabs(rtb_TmpSignalConversionAtSFun_0) *
+    5.0;
+
+  /* Signum: '<S1>/Sign' incorporates:
+   *  Gain: '<S1>/Gain'
+   */
+  if (rtIsNaN(-rtb_TmpSignalConversionAtSFun_0)) {
+    rtb_TmpSignalConversionAtSFun_0 = (rtNaN);
+  } else if (-rtb_TmpSignalConversionAtSFun_0 < 0.0) {
+    /* Saturate: '<S1>/Saturation1' */
+    rtb_TmpSignalConversionAtSFun_0 = 0.0;
+  } else {
+    rtb_TmpSignalConversionAtSFun_0 = (-rtb_TmpSignalConversionAtSFun_0 > 0.0);
+  }
+
+  /* Outport: '<Root>/pwmrev' incorporates:
+   *  Gain: '<S1>/Gain1'
+   *  Saturate: '<S1>/Saturation1'
+   */
+  rtY.pwmrev[2] = 5.0 * rtb_TmpSignalConversionAtSFun_0;
+
+  /* Saturate: '<S1>/Saturation2' incorporates:
+   *  UnitDelay: '<S1>/Unit Delay1'
+   */
+  if (rtDW.UnitDelay1_DSTATE[3] > 1.0) {
+    rtb_TmpSignalConversionAtSFun_0 = 1.0;
+  } else if (rtDW.UnitDelay1_DSTATE[3] < -1.0) {
+    rtb_TmpSignalConversionAtSFun_0 = -1.0;
+  } else {
+    rtb_TmpSignalConversionAtSFun_0 = rtDW.UnitDelay1_DSTATE[3];
+  }
+
+  /* Outport: '<Root>/pwnenable' incorporates:
+   *  Abs: '<S1>/Abs'
+   *  Gain: '<S1>/Gain2'
+   *  Product: '<S1>/Product'
+   */
+  rtY.pwnenable[3] = rtb_wheel_speed_RB * fabs(rtb_TmpSignalConversionAtSFun_0) *
+    5.0;
+
+  /* Signum: '<S1>/Sign' incorporates:
+   *  Gain: '<S1>/Gain'
+   */
+  if (rtIsNaN(-rtb_TmpSignalConversionAtSFun_0)) {
+    rtb_TmpSignalConversionAtSFun_0 = (rtNaN);
+  } else if (-rtb_TmpSignalConversionAtSFun_0 < 0.0) {
+    /* Saturate: '<S1>/Saturation1' */
+    rtb_TmpSignalConversionAtSFun_0 = 0.0;
+  } else {
+    rtb_TmpSignalConversionAtSFun_0 = (-rtb_TmpSignalConversionAtSFun_0 > 0.0);
+  }
+
+  /* Outport: '<Root>/pwmrev' incorporates:
+   *  Gain: '<S1>/Gain1'
+   *  Saturate: '<S1>/Saturation1'
+   */
+  rtY.pwmrev[3] = 5.0 * rtb_TmpSignalConversionAtSFun_0;
+
+  /* Sum: '<S1>/Sum' incorporates:
+   *  Inport: '<Root>/actspeed'
+   */
+  rtb_wheel_speed_LF -= rtU.actspeed;
+  rtb_Sum_l[0] = rtb_wheel_speed_LF;
+  rtb_Sum_l[1] = rtb_R_L - rtU.actspeed;
+  rtb_Sum_l[2] = rtb_wheel_speed_LF;
+  rtb_wheel_speed_LF = rtb_wheel_speed_RF - rtU.actspeed;
+  rtb_Sum_l[3] = rtb_wheel_speed_LF;
+  rtb_Sum_l[4] = rtb_R_R - rtU.actspeed;
+  rtb_Sum_l[5] = rtb_wheel_speed_LF;
+
   /* Update for UnitDelay: '<S1>/Unit Delay1' incorporates:
-   *  Gain: '<S3>/Gain4'
-   *  Gain: '<S3>/Gain5'
+   *  Gain: '<S1>/Gain4'
+   *  Gain: '<S1>/Gain5'
    *  Inport: '<Root>/actang'
    *  Sum: '<S1>/Sum1'
    */
-  _mm_storeu_pd(&rtDW.UnitDelay1_DSTATE[0], _mm_sub_pd(_mm_set_pd
-    (-rtb_PulseGenerator, rtb_PulseGenerator), _mm_loadu_pd(&rtU.actang[0])));
-  _mm_storeu_pd(&rtDW.UnitDelay1_DSTATE[2], _mm_sub_pd(_mm_set_pd(-rtb_deltaR,
-    rtb_deltaR), _mm_loadu_pd(&rtU.actang[2])));
-  for (i = 0; i < 6; i++) {
-    /* Gain: '<S31>/Derivative Gain' */
-    rtb_PulseGenerator = rtb_Sum_l[i];
+  rtDW.UnitDelay1_DSTATE[0] = rtb_deltaL - rtU.actang;
+  rtDW.UnitDelay1_DSTATE[1] = -rtb_deltaL - rtU.actang;
+  rtDW.UnitDelay1_DSTATE[2] = rtb_deltaR - rtU.actang;
+  rtDW.UnitDelay1_DSTATE[3] = -rtb_deltaR - rtU.actang;
+  for (i = 0; i <= 4; i += 2) {
+    /* Gain: '<S46>/Proportional Gain' */
+    tmp = _mm_loadu_pd(&rtb_Sum_l[i]);
+    tmp_0 = _mm_mul_pd(_mm_set1_pd(4.0), tmp);
 
-    /* DiscreteIntegrator: '<S33>/Filter' */
-    rtb_deltaR = rtDW.Filter_DSTATE[i];
-
-    /* Gain: '<S41>/Filter Coefficient' incorporates:
-     *  DiscreteIntegrator: '<S33>/Filter'
-     *  Gain: '<S31>/Derivative Gain'
-     *  Sum: '<S33>/SumD'
+    /* Sum: '<S51>/Sum Fdbk' incorporates:
+     *  Gain: '<S46>/Proportional Gain'
      */
-    rtb_R_L = (0.198895104349163 * rtb_PulseGenerator - rtb_deltaR) *
-      8689.11352061538;
+    tmp_1 = _mm_loadu_pd(&rtDW.Integrator_DSTATE[i]);
+    tmp_2 = _mm_add_pd(tmp_0, tmp_1);
 
-    /* DiscreteIntegrator: '<S38>/Integrator' */
-    rtb_R_R = rtDW.Integrator_DSTATE[i];
+    /* DiscreteIntegrator: '<S41>/Integrator' incorporates:
+     *  Gain: '<S33>/Kb'
+     *  Gain: '<S38>/Integral Gain'
+     *  Gain: '<S46>/Proportional Gain'
+     *  Sum: '<S33>/SumI2'
+     *  Sum: '<S33>/SumI4'
+     *  Sum: '<S51>/Sum Fdbk'
+     */
+    tmp = _mm_add_pd(_mm_add_pd(_mm_mul_pd(_mm_sub_pd(tmp_2, tmp_2), _mm_set1_pd
+      (2.0)), _mm_mul_pd(_mm_set1_pd(4.0E-5), tmp)), tmp_1);
 
     /* Update for UnitDelay: '<S1>/Unit Delay' incorporates:
-     *  DiscreteIntegrator: '<S38>/Integrator'
-     *  Gain: '<S43>/Proportional Gain'
-     *  Sum: '<S47>/Sum'
+     *  DiscreteIntegrator: '<S41>/Integrator'
+     *  Gain: '<S46>/Proportional Gain'
+     *  Sum: '<S50>/Sum'
      */
-    rtDW.UnitDelay_DSTATE[i] = (54.7409706092039 * rtb_PulseGenerator + rtb_R_R)
-      + rtb_R_L;
+    _mm_storeu_pd(&rtDW.UnitDelay_DSTATE[i], _mm_add_pd(tmp_0, tmp));
 
-    /* Update for DiscreteIntegrator: '<S33>/Filter' */
-    rtDW.Filter_DSTATE[i] = 0.0001 * rtb_R_L + rtb_deltaR;
-
-    /* Update for DiscreteIntegrator: '<S38>/Integrator' incorporates:
-     *  Gain: '<S35>/Integral Gain'
+    /* Update for DiscreteIntegrator: '<S41>/Integrator' incorporates:
+     *  Gain: '<S46>/Proportional Gain'
      */
-    rtb_R_R += 0.00122680114575866 * rtb_PulseGenerator;
-    rtDW.Integrator_DSTATE[i] = rtb_R_R;
-    if (rtb_R_R > 1.0) {
-      rtDW.Integrator_DSTATE[i] = 1.0;
-    } else if (rtb_R_R < -1.0) {
-      rtDW.Integrator_DSTATE[i] = -1.0;
-    }
-
-    /* End of Update for DiscreteIntegrator: '<S38>/Integrator' */
+    _mm_storeu_pd(&rtDW.Integrator_DSTATE[i], tmp);
   }
 }
 
