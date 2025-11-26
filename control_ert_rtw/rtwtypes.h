@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.35
- * Simulink Coder version         : 24.2 (R2024b) 21-Jun-2024
- * C/C++ source code generated on : Wed Nov 19 15:28:25 2025
+ * Model version                  : 3.11
+ * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
+ * C/C++ source code generated on : Wed Nov 26 17:03:59 2025
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: AMD->x86-64 (Linux 64)
