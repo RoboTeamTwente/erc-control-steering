@@ -7,12 +7,12 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 3.11
+ * Model version                  : 3.15
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Wed Nov 26 17:03:59 2025
+ * C/C++ source code generated on : Fri Feb 13 12:50:31 2026
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: AMD->x86-64 (Linux 64)
+ * Embedded hardware selection: STMicroelectronics->ST10/Super10
  * Code generation objectives:
  *    1. Execution efficiency
  *    2. RAM efficiency

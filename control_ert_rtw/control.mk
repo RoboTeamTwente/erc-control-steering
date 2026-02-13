@@ -2,7 +2,7 @@
 ## Makefile generated for component 'control'. 
 ## 
 ## Makefile     : control.mk
-## Generated on : Wed Nov 26 17:04:01 2025
+## Generated on : Fri Feb 13 12:50:34 2026
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/control
 ## Product type : executable
 ## 
@@ -210,19 +210,17 @@ SYSTEM_LIBS =
 # C Compiler
 #---------------
 
-CFLAGS_TFL = -msse2 -fno-predictive-commoning
 CFLAGS_BASIC = $(DEFINES) $(INCLUDES)
 
-CFLAGS += $(CFLAGS_TFL) $(CFLAGS_BASIC)
+CFLAGS += $(CFLAGS_BASIC)
 
 #-----------------
 # C++ Compiler
 #-----------------
 
-CPPFLAGS_TFL = -msse2 -fno-predictive-commoning
 CPPFLAGS_BASIC = $(DEFINES) $(INCLUDES)
 
-CPPFLAGS += $(CPPFLAGS_TFL) $(CPPFLAGS_BASIC)
+CPPFLAGS += $(CPPFLAGS_BASIC)
 
 ###########################################################################
 ## INLINED COMMANDS
