@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 3.15
+ * Model version                  : 3.20
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Fri Feb 13 12:50:31 2026
+ * C/C++ source code generated on : Tue Feb 17 09:55:39 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -52,21 +52,21 @@ typedef struct {
   real_T UnitDelay8_DSTATE;            /* '<S1>/Unit Delay8' */
   real_T UnitDelay10_DSTATE;           /* '<S1>/Unit Delay10' */
   real_T UnitDelay1_DSTATE;            /* '<S1>/Unit Delay1' */
-  real_T Integrator_DSTATE;            /* '<S55>/Integrator' */
   real_T UnitDelay3_DSTATE;            /* '<S1>/Unit Delay3' */
-  real_T Integrator_DSTATE_k;          /* '<S107>/Integrator' */
+  real_T Integrator_DSTATE;            /* '<S107>/Integrator' */
   real_T UnitDelay5_DSTATE;            /* '<S1>/Unit Delay5' */
-  real_T Integrator_DSTATE_c;          /* '<S159>/Integrator' */
+  real_T Integrator_DSTATE_o;          /* '<S159>/Integrator' */
   real_T UnitDelay7_DSTATE;            /* '<S1>/Unit Delay7' */
-  real_T Integrator_DSTATE_m;          /* '<S211>/Integrator' */
+  real_T Integrator_DSTATE_i;          /* '<S211>/Integrator' */
   real_T UnitDelay9_DSTATE;            /* '<S1>/Unit Delay9' */
-  real_T Integrator_DSTATE_b;          /* '<S263>/Integrator' */
+  real_T Integrator_DSTATE_e;          /* '<S263>/Integrator' */
   real_T UnitDelay11_DSTATE;           /* '<S1>/Unit Delay11' */
-  real_T Integrator_DSTATE_mt;         /* '<S315>/Integrator' */
+  real_T Integrator_DSTATE_j;          /* '<S315>/Integrator' */
+  real_T Integrator_DSTATE_f;          /* '<S55>/Integrator' */
   int32_T clockTickCounter;            /* '<S1>/Pulse Generator1' */
-  int32_T clockTickCounter_n;          /* '<S1>/Pulse Generator2' */
-  int32_T clockTickCounter_e;          /* '<S1>/Pulse Generator3' */
-  int32_T clockTickCounter_eu;         /* '<S1>/Pulse Generator4' */
+  int32_T clockTickCounter_j;          /* '<S1>/Pulse Generator2' */
+  int32_T clockTickCounter_jz;         /* '<S1>/Pulse Generator3' */
+  int32_T clockTickCounter_p;          /* '<S1>/Pulse Generator4' */
 } DW;
 
 /* External inputs (root inport signals with default storage) */
@@ -83,6 +83,7 @@ typedef struct {
   real_T stepperLBActualPosition;      /* '<Root>/stepperLBActualPosition' */
   real_T stepperRFActualPosition;      /* '<Root>/stepperRFActualPosition' */
   real_T stepperRBActualPosition;      /* '<Root>/stepperRBActualPosition' */
+  real_T deltaTime;                    /* '<Root>/deltaTime' */
 } ExtU;
 
 /* External outputs (root outports fed by signals with default storage) */
@@ -209,7 +210,7 @@ extern RT_MODEL *const rtM;
  * '<S65>'  : 'codegen/control/PID Controller1/Sum Fdbk/Disabled'
  * '<S66>'  : 'codegen/control/PID Controller1/Tracking Mode/Disabled'
  * '<S67>'  : 'codegen/control/PID Controller1/Tracking Mode Sum/Passthrough'
- * '<S68>'  : 'codegen/control/PID Controller1/Tsamp - Integral/TsSignalSpecification'
+ * '<S68>'  : 'codegen/control/PID Controller1/Tsamp - Integral/External Ts'
  * '<S69>'  : 'codegen/control/PID Controller1/Tsamp - Ngain/Passthrough'
  * '<S70>'  : 'codegen/control/PID Controller1/postSat Signal/Forward_Path'
  * '<S71>'  : 'codegen/control/PID Controller1/preInt Signal/Internal PreInt'
@@ -261,7 +262,7 @@ extern RT_MODEL *const rtM;
  * '<S117>' : 'codegen/control/PID Controller2/Sum Fdbk/Disabled'
  * '<S118>' : 'codegen/control/PID Controller2/Tracking Mode/Disabled'
  * '<S119>' : 'codegen/control/PID Controller2/Tracking Mode Sum/Passthrough'
- * '<S120>' : 'codegen/control/PID Controller2/Tsamp - Integral/TsSignalSpecification'
+ * '<S120>' : 'codegen/control/PID Controller2/Tsamp - Integral/External Ts'
  * '<S121>' : 'codegen/control/PID Controller2/Tsamp - Ngain/Passthrough'
  * '<S122>' : 'codegen/control/PID Controller2/postSat Signal/Forward_Path'
  * '<S123>' : 'codegen/control/PID Controller2/preInt Signal/Internal PreInt'
@@ -313,7 +314,7 @@ extern RT_MODEL *const rtM;
  * '<S169>' : 'codegen/control/PID Controller3/Sum Fdbk/Disabled'
  * '<S170>' : 'codegen/control/PID Controller3/Tracking Mode/Disabled'
  * '<S171>' : 'codegen/control/PID Controller3/Tracking Mode Sum/Passthrough'
- * '<S172>' : 'codegen/control/PID Controller3/Tsamp - Integral/TsSignalSpecification'
+ * '<S172>' : 'codegen/control/PID Controller3/Tsamp - Integral/External Ts'
  * '<S173>' : 'codegen/control/PID Controller3/Tsamp - Ngain/Passthrough'
  * '<S174>' : 'codegen/control/PID Controller3/postSat Signal/Forward_Path'
  * '<S175>' : 'codegen/control/PID Controller3/preInt Signal/Internal PreInt'
@@ -365,7 +366,7 @@ extern RT_MODEL *const rtM;
  * '<S221>' : 'codegen/control/PID Controller4/Sum Fdbk/Disabled'
  * '<S222>' : 'codegen/control/PID Controller4/Tracking Mode/Disabled'
  * '<S223>' : 'codegen/control/PID Controller4/Tracking Mode Sum/Passthrough'
- * '<S224>' : 'codegen/control/PID Controller4/Tsamp - Integral/TsSignalSpecification'
+ * '<S224>' : 'codegen/control/PID Controller4/Tsamp - Integral/External Ts'
  * '<S225>' : 'codegen/control/PID Controller4/Tsamp - Ngain/Passthrough'
  * '<S226>' : 'codegen/control/PID Controller4/postSat Signal/Forward_Path'
  * '<S227>' : 'codegen/control/PID Controller4/preInt Signal/Internal PreInt'
@@ -417,7 +418,7 @@ extern RT_MODEL *const rtM;
  * '<S273>' : 'codegen/control/PID Controller5/Sum Fdbk/Disabled'
  * '<S274>' : 'codegen/control/PID Controller5/Tracking Mode/Disabled'
  * '<S275>' : 'codegen/control/PID Controller5/Tracking Mode Sum/Passthrough'
- * '<S276>' : 'codegen/control/PID Controller5/Tsamp - Integral/TsSignalSpecification'
+ * '<S276>' : 'codegen/control/PID Controller5/Tsamp - Integral/External Ts'
  * '<S277>' : 'codegen/control/PID Controller5/Tsamp - Ngain/Passthrough'
  * '<S278>' : 'codegen/control/PID Controller5/postSat Signal/Forward_Path'
  * '<S279>' : 'codegen/control/PID Controller5/preInt Signal/Internal PreInt'
@@ -469,7 +470,7 @@ extern RT_MODEL *const rtM;
  * '<S325>' : 'codegen/control/PID Controller6/Sum Fdbk/Disabled'
  * '<S326>' : 'codegen/control/PID Controller6/Tracking Mode/Disabled'
  * '<S327>' : 'codegen/control/PID Controller6/Tracking Mode Sum/Passthrough'
- * '<S328>' : 'codegen/control/PID Controller6/Tsamp - Integral/TsSignalSpecification'
+ * '<S328>' : 'codegen/control/PID Controller6/Tsamp - Integral/External Ts'
  * '<S329>' : 'codegen/control/PID Controller6/Tsamp - Ngain/Passthrough'
  * '<S330>' : 'codegen/control/PID Controller6/postSat Signal/Forward_Path'
  * '<S331>' : 'codegen/control/PID Controller6/preInt Signal/Internal PreInt'

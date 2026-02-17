@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 3.15
+ * Model version                  : 3.20
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Fri Feb 13 12:50:31 2026
+ * C/C++ source code generated on : Tue Feb 17 09:55:39 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -124,18 +124,18 @@ void control_step(void)
   real_T UnitDelay10_DSTATE_tmp;
   real_T UnitDelay8_DSTATE_tmp;
   real_T alpha;
-  real_T rtb_Integrator_f;
-  real_T rtb_Integrator_i_tmp;
+  real_T rtb_Integrator_a;
   real_T rtb_deltaR;
-  real_T rtb_out_e;
-  real_T rtb_out_o;
+  real_T rtb_out_a;
+  real_T rtb_out_l;
   real_T rtb_v_out;
   real_T rtb_wheel_speed_LF;
+  real_T rtb_wheel_speed_LM;
   real_T rtb_wheel_speed_RF;
   real_T rtb_wheel_speed_RM;
 
   /* DiscretePulseGenerator: '<S1>/Pulse Generator1' */
-  rtb_Integrator_f = ((rtDW.clockTickCounter < 1L) && (rtDW.clockTickCounter >=
+  rtb_Integrator_a = ((rtDW.clockTickCounter < 1L) && (rtDW.clockTickCounter >=
     0L));
   if (rtDW.clockTickCounter >= 1L) {
     rtDW.clockTickCounter = 0L;
@@ -154,34 +154,34 @@ void control_step(void)
    *  UnitDelay: '<S1>/Unit Delay12'
    */
   rtY.stepperLFENA = (real_T)(fabs(rtDW.UnitDelay12_DSTATE) > 0.002) *
-    rtb_Integrator_f * 5.0;
+    rtb_Integrator_a * 5.0;
 
   /* Signum: '<S1>/Sign2' incorporates:
    *  UnitDelay: '<S1>/Unit Delay12'
    */
   if (rtIsNaN(rtDW.UnitDelay12_DSTATE)) {
     /* Gain: '<S1>/Gain1' */
-    rtb_out_o = (rtNaN);
+    rtb_out_a = (rtNaN);
   } else if (rtDW.UnitDelay12_DSTATE < 0.0) {
     /* Gain: '<S1>/Gain1' */
-    rtb_out_o = 1.0;
+    rtb_out_a = 1.0;
   } else {
     /* Gain: '<S1>/Gain1' */
-    rtb_out_o = -(real_T)(rtDW.UnitDelay12_DSTATE > 0.0);
+    rtb_out_a = -(real_T)(rtDW.UnitDelay12_DSTATE > 0.0);
   }
 
   /* End of Signum: '<S1>/Sign2' */
 
   /* Saturate: '<S1>/Saturation6' */
-  if (rtb_out_o < 0.0) {
-    rtb_out_o = 0.0;
+  if (rtb_out_a < 0.0) {
+    rtb_out_a = 0.0;
   }
 
   /* Outport: '<Root>/stepperLFREV' incorporates:
    *  Gain: '<S1>/Gain2'
    *  Saturate: '<S1>/Saturation6'
    */
-  rtY.stepperLFREV = 5.0 * rtb_out_o;
+  rtY.stepperLFREV = 5.0 * rtb_out_a;
 
   /* Saturate: '<S1>/Saturation' incorporates:
    *  UnitDelay: '<S1>/Unit Delay'
@@ -200,12 +200,12 @@ void control_step(void)
   /* End of Saturate: '<S1>/Saturation' */
 
   /* DiscretePulseGenerator: '<S1>/Pulse Generator2' */
-  rtb_Integrator_f = ((rtDW.clockTickCounter_n < 1L) && (rtDW.clockTickCounter_n
+  rtb_Integrator_a = ((rtDW.clockTickCounter_j < 1L) && (rtDW.clockTickCounter_j
     >= 0L));
-  if (rtDW.clockTickCounter_n >= 1L) {
-    rtDW.clockTickCounter_n = 0L;
+  if (rtDW.clockTickCounter_j >= 1L) {
+    rtDW.clockTickCounter_j = 0L;
   } else {
-    rtDW.clockTickCounter_n++;
+    rtDW.clockTickCounter_j++;
   }
 
   /* End of DiscretePulseGenerator: '<S1>/Pulse Generator2' */
@@ -219,42 +219,42 @@ void control_step(void)
    *  UnitDelay: '<S1>/Unit Delay13'
    */
   rtY.stepperLBENA = (real_T)(fabs(rtDW.UnitDelay13_DSTATE) > 0.002) *
-    rtb_Integrator_f * 5.0;
+    rtb_Integrator_a * 5.0;
 
   /* Signum: '<S1>/Sign1' incorporates:
    *  UnitDelay: '<S1>/Unit Delay13'
    */
   if (rtIsNaN(rtDW.UnitDelay13_DSTATE)) {
     /* Gain: '<S1>/Gain3' */
-    rtb_out_o = (rtNaN);
+    rtb_out_a = (rtNaN);
   } else if (rtDW.UnitDelay13_DSTATE < 0.0) {
     /* Gain: '<S1>/Gain3' */
-    rtb_out_o = 1.0;
+    rtb_out_a = 1.0;
   } else {
     /* Gain: '<S1>/Gain3' */
-    rtb_out_o = -(real_T)(rtDW.UnitDelay13_DSTATE > 0.0);
+    rtb_out_a = -(real_T)(rtDW.UnitDelay13_DSTATE > 0.0);
   }
 
   /* End of Signum: '<S1>/Sign1' */
 
   /* Saturate: '<S1>/Saturation7' */
-  if (rtb_out_o < 0.0) {
-    rtb_out_o = 0.0;
+  if (rtb_out_a < 0.0) {
+    rtb_out_a = 0.0;
   }
 
   /* Outport: '<Root>/stepperLBREV' incorporates:
    *  Gain: '<S1>/Gain7'
    *  Saturate: '<S1>/Saturation7'
    */
-  rtY.stepperLBREV = 5.0 * rtb_out_o;
+  rtY.stepperLBREV = 5.0 * rtb_out_a;
 
   /* DiscretePulseGenerator: '<S1>/Pulse Generator3' */
-  rtb_Integrator_f = ((rtDW.clockTickCounter_e < 1L) && (rtDW.clockTickCounter_e
-    >= 0L));
-  if (rtDW.clockTickCounter_e >= 1L) {
-    rtDW.clockTickCounter_e = 0L;
+  rtb_Integrator_a = ((rtDW.clockTickCounter_jz < 1L) &&
+                      (rtDW.clockTickCounter_jz >= 0L));
+  if (rtDW.clockTickCounter_jz >= 1L) {
+    rtDW.clockTickCounter_jz = 0L;
   } else {
-    rtDW.clockTickCounter_e++;
+    rtDW.clockTickCounter_jz++;
   }
 
   /* End of DiscretePulseGenerator: '<S1>/Pulse Generator3' */
@@ -268,42 +268,42 @@ void control_step(void)
    *  UnitDelay: '<S1>/Unit Delay14'
    */
   rtY.stepperRFENA = (real_T)(fabs(rtDW.UnitDelay14_DSTATE) > 0.002) *
-    rtb_Integrator_f * 5.0;
+    rtb_Integrator_a * 5.0;
 
   /* Signum: '<S1>/Sign3' incorporates:
    *  UnitDelay: '<S1>/Unit Delay14'
    */
   if (rtIsNaN(rtDW.UnitDelay14_DSTATE)) {
     /* Gain: '<S1>/Gain9' */
-    rtb_out_o = (rtNaN);
+    rtb_out_a = (rtNaN);
   } else if (rtDW.UnitDelay14_DSTATE < 0.0) {
     /* Gain: '<S1>/Gain9' */
-    rtb_out_o = 1.0;
+    rtb_out_a = 1.0;
   } else {
     /* Gain: '<S1>/Gain9' */
-    rtb_out_o = -(real_T)(rtDW.UnitDelay14_DSTATE > 0.0);
+    rtb_out_a = -(real_T)(rtDW.UnitDelay14_DSTATE > 0.0);
   }
 
   /* End of Signum: '<S1>/Sign3' */
 
   /* Saturate: '<S1>/Saturation8' */
-  if (rtb_out_o < 0.0) {
-    rtb_out_o = 0.0;
+  if (rtb_out_a < 0.0) {
+    rtb_out_a = 0.0;
   }
 
   /* Outport: '<Root>/stepperRFREV' incorporates:
    *  Gain: '<S1>/Gain10'
    *  Saturate: '<S1>/Saturation8'
    */
-  rtY.stepperRFREV = 5.0 * rtb_out_o;
+  rtY.stepperRFREV = 5.0 * rtb_out_a;
 
   /* DiscretePulseGenerator: '<S1>/Pulse Generator4' */
-  rtb_Integrator_f = ((rtDW.clockTickCounter_eu < 1L) &&
-                      (rtDW.clockTickCounter_eu >= 0L));
-  if (rtDW.clockTickCounter_eu >= 1L) {
-    rtDW.clockTickCounter_eu = 0L;
+  rtb_Integrator_a = ((rtDW.clockTickCounter_p < 1L) && (rtDW.clockTickCounter_p
+    >= 0L));
+  if (rtDW.clockTickCounter_p >= 1L) {
+    rtDW.clockTickCounter_p = 0L;
   } else {
-    rtDW.clockTickCounter_eu++;
+    rtDW.clockTickCounter_p++;
   }
 
   /* End of DiscretePulseGenerator: '<S1>/Pulse Generator4' */
@@ -317,34 +317,34 @@ void control_step(void)
    *  UnitDelay: '<S1>/Unit Delay15'
    */
   rtY.stepperRBENA = (real_T)(fabs(rtDW.UnitDelay15_DSTATE) > 0.002) *
-    rtb_Integrator_f * 5.0;
+    rtb_Integrator_a * 5.0;
 
   /* Signum: '<S1>/Sign4' incorporates:
    *  UnitDelay: '<S1>/Unit Delay15'
    */
   if (rtIsNaN(rtDW.UnitDelay15_DSTATE)) {
     /* Gain: '<S1>/Gain14' */
-    rtb_out_o = (rtNaN);
+    rtb_out_a = (rtNaN);
   } else if (rtDW.UnitDelay15_DSTATE < 0.0) {
     /* Gain: '<S1>/Gain14' */
-    rtb_out_o = 1.0;
+    rtb_out_a = 1.0;
   } else {
     /* Gain: '<S1>/Gain14' */
-    rtb_out_o = -(real_T)(rtDW.UnitDelay15_DSTATE > 0.0);
+    rtb_out_a = -(real_T)(rtDW.UnitDelay15_DSTATE > 0.0);
   }
 
   /* End of Signum: '<S1>/Sign4' */
 
   /* Saturate: '<S1>/Saturation9' */
-  if (rtb_out_o < 0.0) {
-    rtb_out_o = 0.0;
+  if (rtb_out_a < 0.0) {
+    rtb_out_a = 0.0;
   }
 
   /* Outport: '<Root>/stepperRBREV' incorporates:
    *  Gain: '<S1>/Gain12'
    *  Saturate: '<S1>/Saturation9'
    */
-  rtY.stepperRBREV = 5.0 * rtb_out_o;
+  rtY.stepperRBREV = 5.0 * rtb_out_a;
 
   /* Saturate: '<S1>/Saturation1' incorporates:
    *  UnitDelay: '<S1>/Unit Delay2'
@@ -436,22 +436,22 @@ void control_step(void)
     alpha = rtU.dist2goal / rtU.R;
   }
 
-  rtb_out_o = fabs(rtU.R);
+  rtb_out_a = fabs(rtU.R);
   if (alpha < 0.0) {
-    rtb_out_e = rtb_out_o + 0.185;
-    rtb_wheel_speed_RM = rtb_out_o - 0.185;
-    alpha = atan(0.57 / (rtb_out_o + 0.185));
-    rtb_deltaR = atan(0.57 / (rtb_out_o - 0.185));
+    rtb_Integrator_a = rtb_out_a + 0.185;
+    rtb_wheel_speed_RM = rtb_out_a - 0.185;
+    alpha = atan(0.57 / (rtb_out_a + 0.185));
+    rtb_deltaR = atan(0.57 / (rtb_out_a - 0.185));
   } else if (alpha > 0.0) {
-    rtb_out_e = rtb_out_o - 0.185;
-    rtb_wheel_speed_RM = rtb_out_o + 0.185;
-    alpha = -atan(0.57 / (rtb_out_o - 0.185));
-    rtb_deltaR = -atan(0.57 / (rtb_out_o + 0.185));
+    rtb_Integrator_a = rtb_out_a - 0.185;
+    rtb_wheel_speed_RM = rtb_out_a + 0.185;
+    alpha = -atan(0.57 / (rtb_out_a - 0.185));
+    rtb_deltaR = -atan(0.57 / (rtb_out_a + 0.185));
   } else {
     alpha = 0.0;
     rtb_deltaR = 0.0;
-    rtb_out_e = rtb_out_o;
-    rtb_wheel_speed_RM = rtb_out_o;
+    rtb_Integrator_a = rtb_out_a;
+    rtb_wheel_speed_RM = rtb_out_a;
   }
 
   /* MATLAB Function: '<S1>/setting desired speed dependant on the goal' incorporates:
@@ -472,20 +472,21 @@ void control_step(void)
    *  Constant: '<S1>/Constant2'
    *  MATLAB Function: '<S1>/getting the steering angles and turing radii'
    */
-  if (rtb_out_o > 0.0) {
+  if (rtb_out_a > 0.0) {
     rtb_wheel_speed_RF = rtb_v_out / 0.1;
-    rtb_wheel_speed_LF = sqrt(rtb_out_e * rtb_out_e + 0.32489999999999997) *
-      rtb_wheel_speed_RF / rtb_out_o;
-    rtb_Integrator_i_tmp = rtb_out_o * 0.1;
-    rtb_Integrator_f = rtb_v_out * rtb_out_e / rtb_Integrator_i_tmp;
-    rtb_out_e = sqrt(rtb_wheel_speed_RM * rtb_wheel_speed_RM +
-                     0.32489999999999997);
-    rtb_wheel_speed_RF = rtb_wheel_speed_RF * rtb_out_e / rtb_out_o;
-    rtb_wheel_speed_RM = rtb_v_out * rtb_wheel_speed_RM / rtb_Integrator_i_tmp;
+    rtb_wheel_speed_LF = sqrt(rtb_Integrator_a * rtb_Integrator_a +
+      0.32489999999999997) * rtb_wheel_speed_RF / rtb_out_a;
+    rtb_out_l = rtb_out_a * 0.1;
+    rtb_wheel_speed_LM = rtb_v_out * rtb_Integrator_a / rtb_out_l;
+    rtb_Integrator_a = rtb_wheel_speed_LF;
+    rtb_wheel_speed_RF = sqrt(rtb_wheel_speed_RM * rtb_wheel_speed_RM +
+      0.32489999999999997) * rtb_wheel_speed_RF / rtb_out_a;
+    rtb_wheel_speed_RM = rtb_v_out * rtb_wheel_speed_RM / rtb_out_l;
     rtb_v_out = rtb_wheel_speed_RF;
   } else {
     rtb_wheel_speed_LF = rtb_v_out / 0.1;
-    rtb_Integrator_f = rtb_wheel_speed_LF;
+    rtb_wheel_speed_LM = rtb_wheel_speed_LF;
+    rtb_Integrator_a = rtb_wheel_speed_LF;
     rtb_wheel_speed_RF = rtb_wheel_speed_LF;
     rtb_wheel_speed_RM = rtb_wheel_speed_LF;
     rtb_v_out = rtb_wheel_speed_LF;
@@ -494,43 +495,46 @@ void control_step(void)
   /* End of MATLAB Function: '<S1>/getting the wheel speeds from the turning radii' */
 
   /* MATLAB Function: '<S1>/MATLAB Function1' incorporates:
-   *  Constant: '<S1>/acceleration'
+   *  Inport: '<Root>/deltaTime'
    *  UnitDelay: '<S1>/Unit Delay1'
    */
-  MATLABFunction1(rtDW.UnitDelay1_DSTATE, rtb_wheel_speed_LF, 1.0, &rtb_out_o);
+  MATLABFunction1(rtDW.UnitDelay1_DSTATE, rtb_wheel_speed_LF, rtU.deltaTime,
+                  &rtb_out_a);
 
   /* MATLAB Function: '<S1>/MATLAB Function2' incorporates:
-   *  Constant: '<S1>/acceleration'
+   *  Inport: '<Root>/deltaTime'
    *  UnitDelay: '<S1>/Unit Delay3'
    */
-  MATLABFunction1(rtDW.UnitDelay3_DSTATE, rtb_Integrator_f, 1.0, &rtb_out_e);
-
-  /* MATLAB Function: '<S1>/MATLAB Function3' incorporates:
-   *  Constant: '<S1>/acceleration'
-   *  UnitDelay: '<S1>/Unit Delay5'
-   */
-  MATLABFunction1(rtDW.UnitDelay5_DSTATE, rtb_wheel_speed_LF, 1.0,
-                  &rtb_Integrator_f);
-
-  /* MATLAB Function: '<S1>/MATLAB Function4' incorporates:
-   *  Constant: '<S1>/acceleration'
-   *  UnitDelay: '<S1>/Unit Delay7'
-   */
-  MATLABFunction1(rtDW.UnitDelay7_DSTATE, rtb_wheel_speed_RF, 1.0,
+  MATLABFunction1(rtDW.UnitDelay3_DSTATE, rtb_wheel_speed_LM, rtU.deltaTime,
                   &rtb_wheel_speed_LF);
 
+  /* MATLAB Function: '<S1>/MATLAB Function3' incorporates:
+   *  Inport: '<Root>/deltaTime'
+   *  UnitDelay: '<S1>/Unit Delay5'
+   */
+  MATLABFunction1(rtDW.UnitDelay5_DSTATE, rtb_Integrator_a, rtU.deltaTime,
+                  &rtb_out_l);
+
+  /* MATLAB Function: '<S1>/MATLAB Function4' incorporates:
+   *  Inport: '<Root>/deltaTime'
+   *  UnitDelay: '<S1>/Unit Delay7'
+   */
+  MATLABFunction1(rtDW.UnitDelay7_DSTATE, rtb_wheel_speed_RF, rtU.deltaTime,
+                  &rtb_Integrator_a);
+
   /* MATLAB Function: '<S1>/MATLAB Function5' incorporates:
-   *  Constant: '<S1>/acceleration'
+   *  Inport: '<Root>/deltaTime'
    *  UnitDelay: '<S1>/Unit Delay9'
    */
-  MATLABFunction1(rtDW.UnitDelay9_DSTATE, rtb_wheel_speed_RM, 1.0,
+  MATLABFunction1(rtDW.UnitDelay9_DSTATE, rtb_wheel_speed_RM, rtU.deltaTime,
                   &rtb_wheel_speed_RF);
 
   /* MATLAB Function: '<S1>/MATLAB Function6' incorporates:
-   *  Constant: '<S1>/acceleration'
+   *  Inport: '<Root>/deltaTime'
    *  UnitDelay: '<S1>/Unit Delay11'
    */
-  MATLABFunction1(rtDW.UnitDelay11_DSTATE, rtb_v_out, 1.0, &rtb_wheel_speed_RM);
+  MATLABFunction1(rtDW.UnitDelay11_DSTATE, rtb_v_out, rtU.deltaTime,
+                  &rtb_wheel_speed_RM);
 
   /* Update for UnitDelay: '<S1>/Unit Delay12' incorporates:
    *  Inport: '<Root>/stepperLFActualPosition'
@@ -551,7 +555,7 @@ void control_step(void)
    *  Gain: '<S60>/Proportional Gain'
    *  Sum: '<S64>/Sum'
    */
-  rtDW.UnitDelay_DSTATE = rtb_v_out + rtDW.Integrator_DSTATE;
+  rtDW.UnitDelay_DSTATE = rtb_v_out + rtDW.Integrator_DSTATE_f;
 
   /* Update for UnitDelay: '<S1>/Unit Delay13' incorporates:
    *  Gain: '<S1>/Gain4'
@@ -586,7 +590,7 @@ void control_step(void)
    *  Gain: '<S112>/Proportional Gain'
    *  Sum: '<S116>/Sum'
    */
-  rtDW.UnitDelay2_DSTATE = alpha + rtDW.Integrator_DSTATE_k;
+  rtDW.UnitDelay2_DSTATE = alpha + rtDW.Integrator_DSTATE;
 
   /* Gain: '<S164>/Proportional Gain' incorporates:
    *  Gain: '<S156>/Integral Gain'
@@ -601,7 +605,7 @@ void control_step(void)
    *  Gain: '<S164>/Proportional Gain'
    *  Sum: '<S168>/Sum'
    */
-  rtDW.UnitDelay4_DSTATE = rtb_deltaR + rtDW.Integrator_DSTATE_c;
+  rtDW.UnitDelay4_DSTATE = rtb_deltaR + rtDW.Integrator_DSTATE_o;
 
   /* Gain: '<S216>/Proportional Gain' incorporates:
    *  Gain: '<S208>/Integral Gain'
@@ -609,14 +613,14 @@ void control_step(void)
    *  Sum: '<S1>/Sum4'
    *  UnitDelay: '<S1>/Unit Delay7'
    */
-  rtb_Integrator_i_tmp = (rtDW.UnitDelay7_DSTATE - rtU.RFActualSpeed) * 2.0;
+  rtb_wheel_speed_LM = (rtDW.UnitDelay7_DSTATE - rtU.RFActualSpeed) * 2.0;
 
   /* Update for UnitDelay: '<S1>/Unit Delay6' incorporates:
    *  DiscreteIntegrator: '<S211>/Integrator'
    *  Gain: '<S216>/Proportional Gain'
    *  Sum: '<S220>/Sum'
    */
-  rtDW.UnitDelay6_DSTATE = rtb_Integrator_i_tmp + rtDW.Integrator_DSTATE_m;
+  rtDW.UnitDelay6_DSTATE = rtb_wheel_speed_LM + rtDW.Integrator_DSTATE_i;
 
   /* Gain: '<S268>/Proportional Gain' incorporates:
    *  Gain: '<S260>/Integral Gain'
@@ -631,7 +635,7 @@ void control_step(void)
    *  Gain: '<S268>/Proportional Gain'
    *  Sum: '<S272>/Sum'
    */
-  rtDW.UnitDelay8_DSTATE = UnitDelay8_DSTATE_tmp + rtDW.Integrator_DSTATE_b;
+  rtDW.UnitDelay8_DSTATE = UnitDelay8_DSTATE_tmp + rtDW.Integrator_DSTATE_e;
 
   /* Gain: '<S320>/Proportional Gain' incorporates:
    *  Gain: '<S312>/Integral Gain'
@@ -646,43 +650,61 @@ void control_step(void)
    *  Gain: '<S320>/Proportional Gain'
    *  Sum: '<S324>/Sum'
    */
-  rtDW.UnitDelay10_DSTATE = UnitDelay10_DSTATE_tmp + rtDW.Integrator_DSTATE_mt;
+  rtDW.UnitDelay10_DSTATE = UnitDelay10_DSTATE_tmp + rtDW.Integrator_DSTATE_j;
 
   /* Update for UnitDelay: '<S1>/Unit Delay1' */
-  rtDW.UnitDelay1_DSTATE = rtb_out_o;
-
-  /* Update for DiscreteIntegrator: '<S55>/Integrator' */
-  rtDW.Integrator_DSTATE += rtb_v_out * 0.001;
+  rtDW.UnitDelay1_DSTATE = rtb_out_a;
 
   /* Update for UnitDelay: '<S1>/Unit Delay3' */
-  rtDW.UnitDelay3_DSTATE = rtb_out_e;
+  rtDW.UnitDelay3_DSTATE = rtb_wheel_speed_LF;
 
-  /* Update for DiscreteIntegrator: '<S107>/Integrator' */
-  rtDW.Integrator_DSTATE_k += alpha * 0.001;
+  /* Update for DiscreteIntegrator: '<S107>/Integrator' incorporates:
+   *  Inport: '<Root>/deltaTime'
+   *  Product: '<S120>/Uintegral*Ts Prod Out'
+   */
+  rtDW.Integrator_DSTATE += alpha * rtU.deltaTime;
 
   /* Update for UnitDelay: '<S1>/Unit Delay5' */
-  rtDW.UnitDelay5_DSTATE = rtb_Integrator_f;
+  rtDW.UnitDelay5_DSTATE = rtb_out_l;
 
-  /* Update for DiscreteIntegrator: '<S159>/Integrator' */
-  rtDW.Integrator_DSTATE_c += rtb_deltaR * 0.001;
+  /* Update for DiscreteIntegrator: '<S159>/Integrator' incorporates:
+   *  Inport: '<Root>/deltaTime'
+   *  Product: '<S172>/Uintegral*Ts Prod Out'
+   */
+  rtDW.Integrator_DSTATE_o += rtb_deltaR * rtU.deltaTime;
 
   /* Update for UnitDelay: '<S1>/Unit Delay7' */
-  rtDW.UnitDelay7_DSTATE = rtb_wheel_speed_LF;
+  rtDW.UnitDelay7_DSTATE = rtb_Integrator_a;
 
-  /* Update for DiscreteIntegrator: '<S211>/Integrator' */
-  rtDW.Integrator_DSTATE_m += rtb_Integrator_i_tmp * 0.001;
+  /* Update for DiscreteIntegrator: '<S211>/Integrator' incorporates:
+   *  Inport: '<Root>/deltaTime'
+   *  Product: '<S224>/Uintegral*Ts Prod Out'
+   */
+  rtDW.Integrator_DSTATE_i += rtb_wheel_speed_LM * rtU.deltaTime;
 
   /* Update for UnitDelay: '<S1>/Unit Delay9' */
   rtDW.UnitDelay9_DSTATE = rtb_wheel_speed_RF;
 
-  /* Update for DiscreteIntegrator: '<S263>/Integrator' */
-  rtDW.Integrator_DSTATE_b += UnitDelay8_DSTATE_tmp * 0.001;
+  /* Update for DiscreteIntegrator: '<S263>/Integrator' incorporates:
+   *  Inport: '<Root>/deltaTime'
+   *  Product: '<S276>/Uintegral*Ts Prod Out'
+   */
+  rtDW.Integrator_DSTATE_e += UnitDelay8_DSTATE_tmp * rtU.deltaTime;
 
   /* Update for UnitDelay: '<S1>/Unit Delay11' */
   rtDW.UnitDelay11_DSTATE = rtb_wheel_speed_RM;
 
-  /* Update for DiscreteIntegrator: '<S315>/Integrator' */
-  rtDW.Integrator_DSTATE_mt += UnitDelay10_DSTATE_tmp * 0.001;
+  /* Update for DiscreteIntegrator: '<S315>/Integrator' incorporates:
+   *  Inport: '<Root>/deltaTime'
+   *  Product: '<S328>/Uintegral*Ts Prod Out'
+   */
+  rtDW.Integrator_DSTATE_j += UnitDelay10_DSTATE_tmp * rtU.deltaTime;
+
+  /* Update for DiscreteIntegrator: '<S55>/Integrator' incorporates:
+   *  Inport: '<Root>/deltaTime'
+   *  Product: '<S68>/Uintegral*Ts Prod Out'
+   */
+  rtDW.Integrator_DSTATE_f += rtb_v_out * rtU.deltaTime;
 }
 
 /* Model initialize function */
