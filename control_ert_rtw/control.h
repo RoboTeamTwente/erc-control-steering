@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 3.20
+ * Model version                  : 3.23
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Tue Feb 17 09:55:39 2026
+ * C/C++ source code generated on : Fri Feb 20 14:04:43 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -55,17 +55,17 @@ typedef struct {
   real_T UnitDelay3_DSTATE;            /* '<S1>/Unit Delay3' */
   real_T Integrator_DSTATE;            /* '<S107>/Integrator' */
   real_T UnitDelay5_DSTATE;            /* '<S1>/Unit Delay5' */
-  real_T Integrator_DSTATE_o;          /* '<S159>/Integrator' */
+  real_T Integrator_DSTATE_n;          /* '<S159>/Integrator' */
   real_T UnitDelay7_DSTATE;            /* '<S1>/Unit Delay7' */
-  real_T Integrator_DSTATE_i;          /* '<S211>/Integrator' */
+  real_T Integrator_DSTATE_o;          /* '<S211>/Integrator' */
   real_T UnitDelay9_DSTATE;            /* '<S1>/Unit Delay9' */
-  real_T Integrator_DSTATE_e;          /* '<S263>/Integrator' */
+  real_T Integrator_DSTATE_f;          /* '<S263>/Integrator' */
   real_T UnitDelay11_DSTATE;           /* '<S1>/Unit Delay11' */
-  real_T Integrator_DSTATE_j;          /* '<S315>/Integrator' */
-  real_T Integrator_DSTATE_f;          /* '<S55>/Integrator' */
+  real_T Integrator_DSTATE_e;          /* '<S315>/Integrator' */
+  real_T Integrator_DSTATE_p;          /* '<S55>/Integrator' */
   int32_T clockTickCounter;            /* '<S1>/Pulse Generator1' */
   int32_T clockTickCounter_j;          /* '<S1>/Pulse Generator2' */
-  int32_T clockTickCounter_jz;         /* '<S1>/Pulse Generator3' */
+  int32_T clockTickCounter_e;          /* '<S1>/Pulse Generator3' */
   int32_T clockTickCounter_p;          /* '<S1>/Pulse Generator4' */
 } DW;
 
@@ -79,10 +79,10 @@ typedef struct {
   real_T RFActualSpeed;                /* '<Root>/RFActualSpeed' */
   real_T RMActualSpeed;                /* '<Root>/RMActualSpeed' */
   real_T RBActualSpeed;                /* '<Root>/RBActualSpeed' */
-  real_T stepperLFActualPosition;      /* '<Root>/stepperLFActualPosition' */
-  real_T stepperLBActualPosition;      /* '<Root>/stepperLBActualPosition' */
-  real_T stepperRFActualPosition;      /* '<Root>/stepperRFActualPosition' */
-  real_T stepperRBActualPosition;      /* '<Root>/stepperRBActualPosition' */
+  real_T actualposition;               /* '<Root>/stepperLFActualPosition' */
+  real_T actualposition_j;             /* '<Root>/stepperLBActualPosition' */
+  real_T actualposition_d;             /* '<Root>/stepperRFActualPosition' */
+  real_T actualposition_l;             /* '<Root>/stepperRBActualPosition' */
   real_T deltaTime;                    /* '<Root>/deltaTime' */
 } ExtU;
 
@@ -124,6 +124,13 @@ extern void control_step(void);
 
 /* Real-time Model object */
 extern RT_MODEL *const rtM;
+
+/*-
+ * These blocks were eliminated from the model due to optimizations:
+ *
+ * Block '<S1>/Scope' : Unused code path elimination
+ * Block '<S1>/Scope1' : Unused code path elimination
+ */
 
 /*-
  * The generated code includes comments that allow you to trace directly
