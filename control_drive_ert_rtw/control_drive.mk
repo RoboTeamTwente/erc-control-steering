@@ -1,9 +1,9 @@
 ###########################################################################
-## Makefile generated for component 'control'. 
+## Makefile generated for component 'control_drive'. 
 ## 
-## Makefile     : control.mk
-## Generated on : Mon Feb 16 15:48:43 2026
-## Final product: $(RELATIVE_PATH_TO_ANCHOR)/control
+## Makefile     : control_drive.mk
+## Generated on : Wed Mar 04 10:27:21 2026
+## Final product: $(RELATIVE_PATH_TO_ANCHOR)/control_drive
 ## Product type : executable
 ## 
 ###########################################################################
@@ -16,8 +16,8 @@
 # PRODUCT_NAME            Name of the system to build
 # MAKEFILE                Name of this makefile
 
-PRODUCT_NAME              = control
-MAKEFILE                  = control.mk
+PRODUCT_NAME              = control_drive
+MAKEFILE                  = control_drive.mk
 MATLAB_ROOT               = /usr/local/MATLAB/R2025b
 MATLAB_BIN                = /usr/local/MATLAB/R2025b/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/glnxa64
@@ -141,7 +141,7 @@ SHAREDLIB_LDFLAGS    = -shared -Wl,--no-undefined
 ## OUTPUT INFO
 ###########################################################################
 
-PRODUCT = $(RELATIVE_PATH_TO_ANCHOR)/control
+PRODUCT = $(RELATIVE_PATH_TO_ANCHOR)/control_drive
 PRODUCT_TYPE = "executable"
 BUILD_TYPE = "Top-Level Standalone Executable"
 
@@ -149,7 +149,7 @@ BUILD_TYPE = "Top-Level Standalone Executable"
 ## INCLUDE PATHS
 ###########################################################################
 
-INCLUDES_BUILDINFO = -I$(START_DIR) -I$(START_DIR)/control_ert_rtw -I$(MATLAB_ROOT)/extern/include -I$(MATLAB_ROOT)/simulink/include -I$(MATLAB_ROOT)/rtw/c/src -I$(MATLAB_ROOT)/rtw/c/src/ext_mode/common -I$(MATLAB_ROOT)/rtw/c/ert
+INCLUDES_BUILDINFO = -I$(START_DIR) -I$(START_DIR)/control_drive_ert_rtw -I$(MATLAB_ROOT)/extern/include -I$(MATLAB_ROOT)/simulink/include -I$(MATLAB_ROOT)/rtw/c/src -I$(MATLAB_ROOT)/rtw/c/src/ext_mode/common -I$(MATLAB_ROOT)/rtw/c/ert
 
 INCLUDES = $(INCLUDES_BUILDINFO)
 
@@ -160,7 +160,7 @@ INCLUDES = $(INCLUDES_BUILDINFO)
 DEFINES_BUILD_ARGS = -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DTERMFCN=0 -DONESTEPFCN=1 -DMAT_FILE=0 -DMULTI_INSTANCE_CODE=0 -DINTEGER_CODE=0 -DMT=0
 DEFINES_CUSTOM = 
 DEFINES_OPTS = -DTID01EQ=0
-DEFINES_STANDARD = -DMODEL=control -DNUMST=1 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
+DEFINES_STANDARD = -DMODEL=control_drive -DNUMST=1 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
 
 DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(DEFINES_STANDARD)
 
@@ -168,9 +168,9 @@ DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(DEFINES_STAN
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/control_ert_rtw/control.c
+SRCS = $(START_DIR)/control_drive_ert_rtw/control_drive.c
 
-MAIN_SRC = $(START_DIR)/control_ert_rtw/ert_main.c
+MAIN_SRC = $(START_DIR)/control_drive_ert_rtw/ert_main.c
 
 ALL_SRCS = $(SRCS) $(MAIN_SRC)
 
@@ -178,7 +178,7 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = control.o
+OBJS = control_drive.o
 
 MAIN_OBJ = ert_main.o
 
@@ -374,35 +374,35 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MAIN_OBJ)
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.o : $(START_DIR)/control_ert_rtw/%.c
+%.o : $(START_DIR)/control_drive_ert_rtw/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.o : $(START_DIR)/control_ert_rtw/%.cpp
+%.o : $(START_DIR)/control_drive_ert_rtw/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.o : $(START_DIR)/control_ert_rtw/%.cc
+%.o : $(START_DIR)/control_drive_ert_rtw/%.cc
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.o : $(START_DIR)/control_ert_rtw/%.cp
+%.o : $(START_DIR)/control_drive_ert_rtw/%.cp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.o : $(START_DIR)/control_ert_rtw/%.cxx
+%.o : $(START_DIR)/control_drive_ert_rtw/%.cxx
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.o : $(START_DIR)/control_ert_rtw/%.CPP
+%.o : $(START_DIR)/control_drive_ert_rtw/%.CPP
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.o : $(START_DIR)/control_ert_rtw/%.c++
+%.o : $(START_DIR)/control_drive_ert_rtw/%.c++
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.o : $(START_DIR)/control_ert_rtw/%.C
+%.o : $(START_DIR)/control_drive_ert_rtw/%.C
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
@@ -502,11 +502,11 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MAIN_OBJ)
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-control.o : $(START_DIR)/control_ert_rtw/control.c
+control_drive.o : $(START_DIR)/control_drive_ert_rtw/control_drive.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-ert_main.o : $(START_DIR)/control_ert_rtw/ert_main.c
+ert_main.o : $(START_DIR)/control_drive_ert_rtw/ert_main.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 

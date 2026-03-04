@@ -3,13 +3,13 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * File: control.c
+ * File: control_drive.c
  *
- * Code generated for Simulink model 'control'.
+ * Code generated for Simulink model 'control_drive'.
  *
- * Model version                  : 3.23
+ * Model version                  : 3.24
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Fri Feb 20 14:04:43 2026
+ * C/C++ source code generated on : Wed Mar  4 10:27:16 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -19,7 +19,7 @@
  * Validation result: Not run
  */
 
-#include "control.h"
+#include "control_drive.h"
 #include "rtwtypes.h"
 #include <math.h>
 #include "math.h"
@@ -119,7 +119,7 @@ static void MATLABFunction1(real_T rtu_current, real_T rtu_desired, real_T
 }
 
 /* Model step function */
-void control_step(void)
+void control_drive_step(void)
 {
   real_T UnitDelay10_DSTATE_tmp;
   real_T UnitDelay8_DSTATE_tmp;
@@ -186,12 +186,12 @@ void control_step(void)
   /* Saturate: '<S1>/Saturation' incorporates:
    *  UnitDelay: '<S1>/Unit Delay'
    */
-  if (rtDW.UnitDelay_DSTATE > 24.0) {
+  if (rtDW.UnitDelay_DSTATE > 5.0) {
     /* Outport: '<Root>/controlLF' */
-    rtY.controlLF = 24.0;
-  } else if (rtDW.UnitDelay_DSTATE < -24.0) {
+    rtY.controlLF = 5.0;
+  } else if (rtDW.UnitDelay_DSTATE < -5.0) {
     /* Outport: '<Root>/controlLF' */
-    rtY.controlLF = -24.0;
+    rtY.controlLF = -5.0;
   } else {
     /* Outport: '<Root>/controlLF' */
     rtY.controlLF = rtDW.UnitDelay_DSTATE;
@@ -349,12 +349,12 @@ void control_step(void)
   /* Saturate: '<S1>/Saturation1' incorporates:
    *  UnitDelay: '<S1>/Unit Delay2'
    */
-  if (rtDW.UnitDelay2_DSTATE > 24.0) {
+  if (rtDW.UnitDelay2_DSTATE > 5.0) {
     /* Outport: '<Root>/controlLM' */
-    rtY.controlLM = 24.0;
-  } else if (rtDW.UnitDelay2_DSTATE < -24.0) {
+    rtY.controlLM = 5.0;
+  } else if (rtDW.UnitDelay2_DSTATE < -5.0) {
     /* Outport: '<Root>/controlLM' */
-    rtY.controlLM = -24.0;
+    rtY.controlLM = -5.0;
   } else {
     /* Outport: '<Root>/controlLM' */
     rtY.controlLM = rtDW.UnitDelay2_DSTATE;
@@ -365,12 +365,12 @@ void control_step(void)
   /* Saturate: '<S1>/Saturation2' incorporates:
    *  UnitDelay: '<S1>/Unit Delay4'
    */
-  if (rtDW.UnitDelay4_DSTATE > 24.0) {
+  if (rtDW.UnitDelay4_DSTATE > 5.0) {
     /* Outport: '<Root>/controlLB' */
-    rtY.controlLB = 24.0;
-  } else if (rtDW.UnitDelay4_DSTATE < -24.0) {
+    rtY.controlLB = 5.0;
+  } else if (rtDW.UnitDelay4_DSTATE < -5.0) {
     /* Outport: '<Root>/controlLB' */
-    rtY.controlLB = -24.0;
+    rtY.controlLB = -5.0;
   } else {
     /* Outport: '<Root>/controlLB' */
     rtY.controlLB = rtDW.UnitDelay4_DSTATE;
@@ -381,12 +381,12 @@ void control_step(void)
   /* Saturate: '<S1>/Saturation3' incorporates:
    *  UnitDelay: '<S1>/Unit Delay6'
    */
-  if (rtDW.UnitDelay6_DSTATE > 24.0) {
+  if (rtDW.UnitDelay6_DSTATE > 5.0) {
     /* Outport: '<Root>/controlRF' */
-    rtY.controlRF = 24.0;
-  } else if (rtDW.UnitDelay6_DSTATE < -24.0) {
+    rtY.controlRF = 5.0;
+  } else if (rtDW.UnitDelay6_DSTATE < -5.0) {
     /* Outport: '<Root>/controlRF' */
-    rtY.controlRF = -24.0;
+    rtY.controlRF = -5.0;
   } else {
     /* Outport: '<Root>/controlRF' */
     rtY.controlRF = rtDW.UnitDelay6_DSTATE;
@@ -397,12 +397,12 @@ void control_step(void)
   /* Saturate: '<S1>/Saturation4' incorporates:
    *  UnitDelay: '<S1>/Unit Delay8'
    */
-  if (rtDW.UnitDelay8_DSTATE > 24.0) {
+  if (rtDW.UnitDelay8_DSTATE > 5.0) {
     /* Outport: '<Root>/controlRM' */
-    rtY.controlRM = 24.0;
-  } else if (rtDW.UnitDelay8_DSTATE < -24.0) {
+    rtY.controlRM = 5.0;
+  } else if (rtDW.UnitDelay8_DSTATE < -5.0) {
     /* Outport: '<Root>/controlRM' */
-    rtY.controlRM = -24.0;
+    rtY.controlRM = -5.0;
   } else {
     /* Outport: '<Root>/controlRM' */
     rtY.controlRM = rtDW.UnitDelay8_DSTATE;
@@ -413,12 +413,12 @@ void control_step(void)
   /* Saturate: '<S1>/Saturation5' incorporates:
    *  UnitDelay: '<S1>/Unit Delay10'
    */
-  if (rtDW.UnitDelay10_DSTATE > 24.0) {
+  if (rtDW.UnitDelay10_DSTATE > 5.0) {
     /* Outport: '<Root>/controlRB' */
-    rtY.controlRB = 24.0;
-  } else if (rtDW.UnitDelay10_DSTATE < -24.0) {
+    rtY.controlRB = 5.0;
+  } else if (rtDW.UnitDelay10_DSTATE < -5.0) {
     /* Outport: '<Root>/controlRB' */
-    rtY.controlRB = -24.0;
+    rtY.controlRB = -5.0;
   } else {
     /* Outport: '<Root>/controlRB' */
     rtY.controlRB = rtDW.UnitDelay10_DSTATE;
@@ -712,7 +712,7 @@ void control_step(void)
 }
 
 /* Model initialize function */
-void control_initialize(void)
+void control_drive_initialize(void)
 {
   /* (no initialization code required) */
 }
