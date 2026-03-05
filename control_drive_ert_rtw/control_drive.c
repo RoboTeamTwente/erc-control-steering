@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control_drive'.
  *
- * Model version                  : 3.24
+ * Model version                  : 3.26
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Wed Mar  4 10:27:16 2026
+ * C/C++ source code generated on : Wed Mar  4 15:59:44 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -544,7 +544,7 @@ void control_drive_step(void)
    *  Inport: '<Root>/stepperLFActualPosition'
    *  Sum: '<S1>/Sum7'
    */
-  rtDW.UnitDelay12_DSTATE = alpha - rtU.actualposition;
+  rtDW.UnitDelay12_DSTATE = alpha - rtU.stepperLFActualPosition;
 
   /* Gain: '<S60>/Proportional Gain' incorporates:
    *  Gain: '<S52>/Integral Gain'
@@ -552,7 +552,7 @@ void control_drive_step(void)
    *  Sum: '<S1>/Sum'
    *  UnitDelay: '<S1>/Unit Delay1'
    */
-  rtb_Product = (rtDW.UnitDelay1_DSTATE - rtU.LFActualSpeed) * 2.0;
+  rtb_Product = (rtDW.UnitDelay1_DSTATE - rtU.LFActualSpeed) * 0.2;
 
   /* Update for UnitDelay: '<S1>/Unit Delay' incorporates:
    *  DiscreteIntegrator: '<S55>/Integrator'
@@ -566,20 +566,20 @@ void control_drive_step(void)
    *  Inport: '<Root>/stepperLBActualPosition'
    *  Sum: '<S1>/Sum1'
    */
-  rtDW.UnitDelay13_DSTATE = -alpha - rtU.actualposition_j;
+  rtDW.UnitDelay13_DSTATE = -alpha - rtU.stepperLBActualPosition;
 
   /* Update for UnitDelay: '<S1>/Unit Delay14' incorporates:
    *  Inport: '<Root>/stepperRFActualPosition'
    *  Sum: '<S1>/Sum8'
    */
-  rtDW.UnitDelay14_DSTATE = rtb_deltaR - rtU.actualposition_d;
+  rtDW.UnitDelay14_DSTATE = rtb_deltaR - rtU.stepperRFActualPosition;
 
   /* Update for UnitDelay: '<S1>/Unit Delay15' incorporates:
    *  Gain: '<S1>/Gain5'
    *  Inport: '<Root>/stepperRBActualPosition'
    *  Sum: '<S1>/Sum9'
    */
-  rtDW.UnitDelay15_DSTATE = -rtb_deltaR - rtU.actualposition_l;
+  rtDW.UnitDelay15_DSTATE = -rtb_deltaR - rtU.stepperRBActualPosition;
 
   /* Gain: '<S112>/Proportional Gain' incorporates:
    *  Gain: '<S104>/Integral Gain'
@@ -587,7 +587,7 @@ void control_drive_step(void)
    *  Sum: '<S1>/Sum2'
    *  UnitDelay: '<S1>/Unit Delay3'
    */
-  alpha = (rtDW.UnitDelay3_DSTATE - rtU.LMActualSpeed) * 2.0;
+  alpha = (rtDW.UnitDelay3_DSTATE - rtU.LMActualSpeed) * 0.2;
 
   /* Update for UnitDelay: '<S1>/Unit Delay2' incorporates:
    *  DiscreteIntegrator: '<S107>/Integrator'
@@ -602,7 +602,7 @@ void control_drive_step(void)
    *  Sum: '<S1>/Sum3'
    *  UnitDelay: '<S1>/Unit Delay5'
    */
-  rtb_deltaR = (rtDW.UnitDelay5_DSTATE - rtU.LBActualSpeed) * 2.0;
+  rtb_deltaR = (rtDW.UnitDelay5_DSTATE - rtU.LBActualSpeed) * 0.2;
 
   /* Update for UnitDelay: '<S1>/Unit Delay4' incorporates:
    *  DiscreteIntegrator: '<S159>/Integrator'
@@ -617,7 +617,7 @@ void control_drive_step(void)
    *  Sum: '<S1>/Sum4'
    *  UnitDelay: '<S1>/Unit Delay7'
    */
-  rtb_Integrator_b_tmp = (rtDW.UnitDelay7_DSTATE - rtU.RFActualSpeed) * 2.0;
+  rtb_Integrator_b_tmp = (rtDW.UnitDelay7_DSTATE - rtU.RFActualSpeed) * 0.2;
 
   /* Update for UnitDelay: '<S1>/Unit Delay6' incorporates:
    *  DiscreteIntegrator: '<S211>/Integrator'
@@ -632,7 +632,7 @@ void control_drive_step(void)
    *  Sum: '<S1>/Sum5'
    *  UnitDelay: '<S1>/Unit Delay9'
    */
-  UnitDelay8_DSTATE_tmp = (rtDW.UnitDelay9_DSTATE - rtU.RMActualSpeed) * 2.0;
+  UnitDelay8_DSTATE_tmp = (rtDW.UnitDelay9_DSTATE - rtU.RMActualSpeed) * 0.2;
 
   /* Update for UnitDelay: '<S1>/Unit Delay8' incorporates:
    *  DiscreteIntegrator: '<S263>/Integrator'
@@ -647,7 +647,7 @@ void control_drive_step(void)
    *  Sum: '<S1>/Sum6'
    *  UnitDelay: '<S1>/Unit Delay11'
    */
-  UnitDelay10_DSTATE_tmp = (rtDW.UnitDelay11_DSTATE - rtU.RBActualSpeed) * 2.0;
+  UnitDelay10_DSTATE_tmp = (rtDW.UnitDelay11_DSTATE - rtU.RBActualSpeed) * 0.2;
 
   /* Update for UnitDelay: '<S1>/Unit Delay10' incorporates:
    *  DiscreteIntegrator: '<S315>/Integrator'
