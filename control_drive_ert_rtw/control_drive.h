@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control_drive'.
  *
- * Model version                  : 3.30
+ * Model version                  : 3.32
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Mon Mar 23 11:35:45 2026
+ * C/C++ source code generated on : Wed Apr 15 12:43:44 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -24,8 +24,6 @@
 #ifndef control_drive_COMMON_INCLUDES_
 #define control_drive_COMMON_INCLUDES_
 #include "rtwtypes.h"
-#include "rtw_continuous.h"
-#include "rtw_solver.h"
 #include "math.h"
 #endif                                 /* control_drive_COMMON_INCLUDES_ */
 
@@ -148,7 +146,7 @@ extern RT_MODEL *const rtM;
  * '<S13>'  : 'codegen_drive/control_drive/PID Controller6'
  * '<S14>'  : 'codegen_drive/control_drive/getting the steering angles and turing radii'
  * '<S15>'  : 'codegen_drive/control_drive/getting the wheel speeds from the turning radii'
- * '<S16>'  : 'codegen_drive/control_drive/setting desired speed dependant on the goal'
+ * '<S16>'  : 'codegen_drive/control_drive/setting desired speed dependant  on the distance to the goal'
  * '<S17>'  : 'codegen_drive/control_drive/PID Controller1/Anti-windup'
  * '<S18>'  : 'codegen_drive/control_drive/PID Controller1/D Gain'
  * '<S19>'  : 'codegen_drive/control_drive/PID Controller1/External Derivative'
