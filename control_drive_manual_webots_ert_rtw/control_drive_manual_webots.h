@@ -3,29 +3,29 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * File: control_drive_manual.h
+ * File: control_drive_manual_webots.h
  *
- * Code generated for Simulink model 'control_drive_manual'.
+ * Code generated for Simulink model 'control_drive_manual_webots'.
  *
- * Model version                  : 1.5
+ * Model version                  : 1.6
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Fri May 15 11:28:11 2026
+ * C/C++ source code generated on : Fri May 15 11:30:04 2026
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: STMicroelectronics->ST10/Super10
+ * Embedded hardware selection: Intel->x86-64 (Linux 64)
  * Code generation objectives:
  *    1. Execution efficiency
  *    2. RAM efficiency
  * Validation result: Not run
  */
 
-#ifndef control_drive_manual_h_
-#define control_drive_manual_h_
-#ifndef control_drive_manual_COMMON_INCLUDES_
-#define control_drive_manual_COMMON_INCLUDES_
+#ifndef control_drive_manual_webots_h_
+#define control_drive_manual_webots_h_
+#ifndef control_drive_manual_webots_COMMON_INCLUDES_
+#define control_drive_manual_webots_COMMON_INCLUDES_
 #include "rtwtypes.h"
 #include "math.h"
-#endif                               /* control_drive_manual_COMMON_INCLUDES_ */
+#endif                        /* control_drive_manual_webots_COMMON_INCLUDES_ */
 
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetErrorStatus
@@ -90,8 +90,8 @@ extern ExtU rtU;
 extern ExtY rtY;
 
 /* Model entry point functions */
-extern void control_drive_manual_initialize(void);
-extern void control_drive_manual_step(void);
+extern void control_drive_manual_webots_initialize(void);
+extern void control_drive_manual_webots_step(void);
 
 /* Real-time Model object */
 extern RT_MODEL *const rtM;
@@ -108,18 +108,18 @@ extern RT_MODEL *const rtM;
  * MATLAB hilite_system command to trace the generated code back
  * to the parent model.  For example,
  *
- * hilite_system('codegen_drive_manual/control_drive_manual')    - opens subsystem codegen_drive_manual/control_drive_manual
- * hilite_system('codegen_drive_manual/control_drive_manual/Kp') - opens and selects block Kp
+ * hilite_system('codegen_drive_manual_webots/control_drive_manual_webots')    - opens subsystem codegen_drive_manual_webots/control_drive_manual_webots
+ * hilite_system('codegen_drive_manual_webots/control_drive_manual_webots/Kp') - opens and selects block Kp
  *
  * Here is the system hierarchy for this model
  *
- * '<Root>' : 'codegen_drive_manual'
- * '<S1>'   : 'codegen_drive_manual/control_drive_manual'
- * '<S2>'   : 'codegen_drive_manual/control_drive_manual/getting the steering angles and turing radii'
- * '<S3>'   : 'codegen_drive_manual/control_drive_manual/getting the wheel speeds from the turning radii'
- * '<S4>'   : 'codegen_drive_manual/control_drive_manual/setting the desired speed of the shassis'
+ * '<Root>' : 'codegen_drive_manual_webots'
+ * '<S1>'   : 'codegen_drive_manual_webots/control_drive_manual_webots'
+ * '<S2>'   : 'codegen_drive_manual_webots/control_drive_manual_webots/getting the steering angles and turing radii'
+ * '<S3>'   : 'codegen_drive_manual_webots/control_drive_manual_webots/getting the wheel speeds from the turning radii'
+ * '<S4>'   : 'codegen_drive_manual_webots/control_drive_manual_webots/setting the desired speed of the shassis'
  */
-#endif                                 /* control_drive_manual_h_ */
+#endif                                 /* control_drive_manual_webots_h_ */
 
 /*
  * File trailer for generated code.

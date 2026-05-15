@@ -5,14 +5,14 @@
  *
  * File: ert_main.c
  *
- * Code generated for Simulink model 'control_drive_manual'.
+ * Code generated for Simulink model 'control_drive_manual_webots'.
  *
- * Model version                  : 1.5
+ * Model version                  : 1.6
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Fri May 15 11:28:11 2026
+ * C/C++ source code generated on : Fri May 15 11:30:04 2026
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: STMicroelectronics->ST10/Super10
+ * Embedded hardware selection: Intel->x86-64 (Linux 64)
  * Code generation objectives:
  *    1. Execution efficiency
  *    2. RAM efficiency
@@ -21,7 +21,7 @@
 
 #include <stddef.h>
 #include <stdio.h>            /* This example main program uses printf/fflush */
-#include "control_drive_manual.h"      /* Model header file */
+#include "control_drive_manual_webots.h" /* Model header file */
 
 /*
  * Associating rt_OneStep with a real-time clock or interrupt service routine
@@ -54,7 +54,7 @@ void rt_OneStep(void)
   /* Set model inputs here */
 
   /* Step the model */
-  control_drive_manual_step();
+  control_drive_manual_webots_step();
 
   /* Get model outputs here */
 
@@ -79,7 +79,7 @@ int_T main(int_T argc, const char *argv[])
   (void)(argv);
 
   /* Initialize model */
-  control_drive_manual_initialize();
+  control_drive_manual_webots_initialize();
 
   /* Attach rt_OneStep to a timer or interrupt service routine with
    * period 0.001 seconds (base rate of the model) here.

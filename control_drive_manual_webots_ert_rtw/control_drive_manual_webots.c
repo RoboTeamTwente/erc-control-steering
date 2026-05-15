@@ -3,23 +3,23 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * File: control_drive_manual.c
+ * File: control_drive_manual_webots.c
  *
- * Code generated for Simulink model 'control_drive_manual'.
+ * Code generated for Simulink model 'control_drive_manual_webots'.
  *
- * Model version                  : 1.5
+ * Model version                  : 1.6
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Fri May 15 11:28:11 2026
+ * C/C++ source code generated on : Fri May 15 11:30:04 2026
  *
  * Target selection: ert.tlc
- * Embedded hardware selection: STMicroelectronics->ST10/Super10
+ * Embedded hardware selection: Intel->x86-64 (Linux 64)
  * Code generation objectives:
  *    1. Execution efficiency
  *    2. RAM efficiency
  * Validation result: Not run
  */
 
-#include "control_drive_manual.h"
+#include "control_drive_manual_webots.h"
 #include <math.h>
 #include "rtwtypes.h"
 
@@ -55,7 +55,7 @@ real_T rt_roundd_snf(real_T u)
 }
 
 /* Model step function */
-void control_drive_manual_step(void)
+void control_drive_manual_webots_step(void)
 {
   real_T R_left;
   real_T R_right;
@@ -230,7 +230,7 @@ void control_drive_manual_step(void)
 }
 
 /* Model initialize function */
-void control_drive_manual_initialize(void)
+void control_drive_manual_webots_initialize(void)
 {
   /* ConstCode for Outport: '<Root>/stepperLFFrequency' incorporates:
    *  Constant: '<S1>/Constant'
