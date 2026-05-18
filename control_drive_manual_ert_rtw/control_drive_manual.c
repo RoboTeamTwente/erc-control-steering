@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control_drive_manual'.
  *
- * Model version                  : 1.5
+ * Model version                  : 1.13
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Fri May 15 11:28:11 2026
+ * C/C++ source code generated on : Mon May 18 12:32:25 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -57,137 +57,117 @@ real_T rt_roundd_snf(real_T u)
 /* Model step function */
 void control_drive_manual_step(void)
 {
-  real_T R_left;
-  real_T R_right;
-  real_T controlLF_tmp;
-  real_T controlLF_tmp_tmp;
-  real_T controlLM_tmp;
-  real_T current;
   real_T rtb_R;
   real_T rtb_deltaL;
   real_T rtb_deltaR;
+  real_T rtb_wheel_speed_LF;
+  real_T rtb_wheel_speed_LF_tmp;
+  real_T rtb_wheel_speed_LM;
+  real_T rtb_wheel_speed_LM_tmp;
+  real_T rtb_wheel_speed_RM;
 
-  /* MATLAB Function: '<S1>/setting the desired speed of the shassis' incorporates:
-   *  Constant: '<S1>/Constant10'
-   *  Constant: '<S1>/Constant11'
-   *  Inport: '<Root>/deltaTime'
-   *  Inport: '<Root>/desiredSpeed'
-   *  UnitDelay: '<S1>/Unit Delay2'
+  /* MATLAB Function: '<S1>/MATLAB Function' incorporates:
+   *  Constant: '<S1>/integer maximum1'
+   *  Constant: '<S1>/smallest turn radius'
+   *  Inport: '<Root>/controllerSteering'
    */
-  current = rtDW.UnitDelay2_DSTATE;
-  if (rtDW.UnitDelay2_DSTATE >= 0.0) {
-    if (rtDW.UnitDelay2_DSTATE < rtU.desiredSpeed) {
-      current = 0.05 * rtU.deltaTime + rtDW.UnitDelay2_DSTATE;
-    }
-
-    if (current > rtU.desiredSpeed) {
-      current -= 0.1 * rtU.deltaTime;
-    }
+  if (rtU.controllerSteering != 0.0) {
+    rtb_R = 0.0;
+  } else {
+    rtb_R = 3.0 / (rtU.controllerSteering / 2.147483647E+9);
   }
 
-  if (current <= 0.0) {
-    if (current > rtU.desiredSpeed) {
-      current -= 0.05 * rtU.deltaTime;
-    }
-
-    if (current < rtU.desiredSpeed) {
-      current += 0.1 * rtU.deltaTime;
-    }
-  }
+  /* End of MATLAB Function: '<S1>/MATLAB Function' */
 
   /* MATLAB Function: '<S1>/getting the steering angles and turing radii' incorporates:
    *  Constant: '<S1>/Constant5'
    *  Constant: '<S1>/Constant6'
-   *  Inport: '<Root>/R'
    */
-  if (rtU.R < 0.0) {
-    R_left = rtU.R + 0.37;
-    R_right = rtU.R - 0.37;
-    rtb_deltaL = atan(0.57 / (rtU.R + 0.37));
-    rtb_deltaR = atan(0.57 / (rtU.R - 0.37));
-  } else if (rtU.R > 0.0) {
-    R_left = rtU.R - 0.37;
-    R_right = rtU.R + 0.37;
-    rtb_deltaL = -atan(0.57 / (rtU.R - 0.37));
-    rtb_deltaR = -atan(0.57 / (rtU.R + 0.37));
+  if (rtb_R < 0.0) {
+    rtb_wheel_speed_LM = rtb_R + 0.37;
+    rtb_wheel_speed_RM = rtb_R - 0.37;
+    rtb_deltaL = atan(0.57 / (rtb_R + 0.37));
+    rtb_deltaR = atan(0.57 / (rtb_R - 0.37));
+  } else if (rtb_R > 0.0) {
+    rtb_wheel_speed_LM = rtb_R - 0.37;
+    rtb_wheel_speed_RM = rtb_R + 0.37;
+    rtb_deltaL = -atan(0.57 / (rtb_R - 0.37));
+    rtb_deltaR = -atan(0.57 / (rtb_R + 0.37));
   } else {
     rtb_deltaL = 0.0;
     rtb_deltaR = 0.0;
-    R_left = rtU.R;
-    R_right = rtU.R;
+    rtb_wheel_speed_LM = rtb_R;
+    rtb_wheel_speed_RM = rtb_R;
   }
-
-  rtb_R = fabs(rtU.R);
 
   /* MATLAB Function: '<S1>/getting the wheel speeds from the turning radii' incorporates:
    *  Constant: '<S1>/Constant2'
    *  MATLAB Function: '<S1>/getting the steering angles and turing radii'
    *  UnitDelay: '<S1>/Unit Delay2'
    */
-  if (rtb_R > 0.0) {
-    controlLF_tmp_tmp = rtDW.UnitDelay2_DSTATE / 0.1;
-    controlLF_tmp = sqrt(R_left * R_left + 0.081224999999999992) *
-      controlLF_tmp_tmp / rtb_R;
-
-    /* Outport: '<Root>/controlLF' incorporates:
-     *  Constant: '<S1>/Constant2'
-     *  MATLAB Function: '<S1>/getting the steering angles and turing radii'
-     *  UnitDelay: '<S1>/Unit Delay2'
-     */
-    rtY.controlLF = controlLF_tmp;
-    controlLM_tmp = rtb_R * 0.1;
-
-    /* Outport: '<Root>/controlLM' incorporates:
-     *  Constant: '<S1>/Constant2'
-     *  MATLAB Function: '<S1>/getting the steering angles and turing radii'
-     *  UnitDelay: '<S1>/Unit Delay2'
-     */
-    rtY.controlLM = rtDW.UnitDelay2_DSTATE * R_left / controlLM_tmp;
-
-    /* Outport: '<Root>/controlLB' */
-    rtY.controlLB = controlLF_tmp;
-    R_left = sqrt(R_right * R_right + 0.081224999999999992) * controlLF_tmp_tmp /
-      rtb_R;
-
-    /* Outport: '<Root>/controlRF' incorporates:
-     *  MATLAB Function: '<S1>/getting the steering angles and turing radii'
-     */
-    rtY.controlRF = R_left;
-
-    /* Outport: '<Root>/controlRM' incorporates:
-     *  MATLAB Function: '<S1>/getting the steering angles and turing radii'
-     *  UnitDelay: '<S1>/Unit Delay2'
-     */
-    rtY.controlRM = rtDW.UnitDelay2_DSTATE * R_right / controlLM_tmp;
-
-    /* Outport: '<Root>/controlRB' */
-    rtY.controlRB = R_left;
+  if (rtb_R == 0.0) {
+    rtb_wheel_speed_LF = rtDW.UnitDelay2_DSTATE / 0.1;
+    rtb_wheel_speed_LM = rtb_wheel_speed_LF;
+    rtb_R = rtb_wheel_speed_LF;
+    rtb_wheel_speed_RM = rtb_wheel_speed_LF;
   } else {
-    controlLF_tmp = rtDW.UnitDelay2_DSTATE / 0.1;
-
-    /* Outport: '<Root>/controlLF' incorporates:
-     *  Constant: '<S1>/Constant2'
-     *  UnitDelay: '<S1>/Unit Delay2'
-     */
-    rtY.controlLF = controlLF_tmp;
-
-    /* Outport: '<Root>/controlLM' */
-    rtY.controlLM = controlLF_tmp;
-
-    /* Outport: '<Root>/controlLB' */
-    rtY.controlLB = controlLF_tmp;
-
-    /* Outport: '<Root>/controlRF' */
-    rtY.controlRF = controlLF_tmp;
-
-    /* Outport: '<Root>/controlRM' */
-    rtY.controlRM = controlLF_tmp;
-
-    /* Outport: '<Root>/controlRB' */
-    rtY.controlRB = controlLF_tmp;
+    rtb_wheel_speed_LF_tmp = rtDW.UnitDelay2_DSTATE / 0.1;
+    rtb_wheel_speed_LF = sqrt(rtb_wheel_speed_LM * rtb_wheel_speed_LM +
+      0.081224999999999992) * rtb_wheel_speed_LF_tmp / rtb_R;
+    rtb_wheel_speed_LM_tmp = rtb_R * 0.1;
+    rtb_wheel_speed_LM = rtDW.UnitDelay2_DSTATE * rtb_wheel_speed_LM /
+      rtb_wheel_speed_LM_tmp;
+    rtb_R = sqrt(rtb_wheel_speed_RM * rtb_wheel_speed_RM + 0.081224999999999992)
+      * rtb_wheel_speed_LF_tmp / rtb_R;
+    rtb_wheel_speed_RM = rtDW.UnitDelay2_DSTATE * rtb_wheel_speed_RM /
+      rtb_wheel_speed_LM_tmp;
   }
 
   /* End of MATLAB Function: '<S1>/getting the wheel speeds from the turning radii' */
+
+  /* Gain: '<S1>/pole pairs' incorporates:
+   *  Gain: '<S1>/gear box'
+   *  Gain: '<S1>/pole pairs2'
+   *  Gain: '<S1>/rad//s to rpm'
+   */
+  rtb_wheel_speed_LF = 9.5492965855137211 * rtb_wheel_speed_LF * 10.0 * 21.0;
+
+  /* Outport: '<Root>/controlLF' incorporates:
+   *  Gain: '<S1>/pole pairs'
+   */
+  rtY.controlLF = rtb_wheel_speed_LF;
+
+  /* Outport: '<Root>/controlLM' incorporates:
+   *  Gain: '<S1>/gear box1'
+   *  Gain: '<S1>/pole pairs1'
+   *  Gain: '<S1>/rad//s to rpm1'
+   */
+  rtY.controlLM = 9.5492965855137211 * rtb_wheel_speed_LM * 10.0 * 21.0;
+
+  /* Outport: '<Root>/controlLB' */
+  rtY.controlLB = rtb_wheel_speed_LF;
+
+  /* Gain: '<S1>/pole pairs3' incorporates:
+   *  Gain: '<S1>/gear box3'
+   *  Gain: '<S1>/pole pairs5'
+   *  Gain: '<S1>/rad//s to rpm3'
+   */
+  rtb_wheel_speed_LM = 9.5492965855137211 * rtb_R * 10.0 * 21.0;
+
+  /* Outport: '<Root>/controlRF' incorporates:
+   *  Gain: '<S1>/pole pairs3'
+   */
+  rtY.controlRF = rtb_wheel_speed_LM;
+
+  /* Outport: '<Root>/controlRM' incorporates:
+   *  Gain: '<S1>/gear box4'
+   *  Gain: '<S1>/pole pairs4'
+   *  Gain: '<S1>/rad//s to rpm4'
+   */
+  rtY.controlRM = 9.5492965855137211 * rtb_wheel_speed_RM * 10.0 * 21.0;
+
+  /* Outport: '<Root>/controlRB' */
+  rtY.controlRB = rtb_wheel_speed_LM;
 
   /* Outport: '<Root>/stepperLFSteps' incorporates:
    *  Constant: '<S1>/Constant7'
@@ -223,10 +203,45 @@ void control_drive_manual_step(void)
    */
   rtY.stepperRBSteps = rt_roundd_snf(57.295779513082323 * -rtb_deltaR / 1.8);
 
+  /* Product: '<S1>/Product' incorporates:
+   *  Constant: '<S1>/integer maximum'
+   *  Constant: '<S1>/max speed'
+   *  Inport: '<Root>/controllerSpeed'
+   *  Product: '<S1>/Divide'
+   */
+  rtb_deltaL = rtU.controllerSpeed / 2.147483647E+9 * 0.7;
+
+  /* MATLAB Function: '<S1>/setting the desired speed of the shassis' incorporates:
+   *  Constant: '<S1>/Constant10'
+   *  Constant: '<S1>/Constant11'
+   *  Inport: '<Root>/deltaTime'
+   *  UnitDelay: '<S1>/Unit Delay2'
+   */
+  rtb_deltaR = rtDW.UnitDelay2_DSTATE;
+  if (rtDW.UnitDelay2_DSTATE >= 0.0) {
+    if (rtDW.UnitDelay2_DSTATE < rtb_deltaL) {
+      rtb_deltaR = 0.05 * rtU.deltaTime + rtDW.UnitDelay2_DSTATE;
+    }
+
+    if (rtb_deltaR > rtb_deltaL) {
+      rtb_deltaR -= 0.1 * rtU.deltaTime;
+    }
+  }
+
+  if (rtb_deltaR <= 0.0) {
+    if (rtb_deltaR > rtb_deltaL) {
+      rtb_deltaR -= 0.05 * rtU.deltaTime;
+    }
+
+    if (rtb_deltaR < rtb_deltaL) {
+      rtb_deltaR += 0.1 * rtU.deltaTime;
+    }
+  }
+
   /* Update for UnitDelay: '<S1>/Unit Delay2' incorporates:
    *  MATLAB Function: '<S1>/setting the desired speed of the shassis'
    */
-  rtDW.UnitDelay2_DSTATE = current;
+  rtDW.UnitDelay2_DSTATE = rtb_deltaR;
 }
 
 /* Model initialize function */
@@ -235,22 +250,22 @@ void control_drive_manual_initialize(void)
   /* ConstCode for Outport: '<Root>/stepperLFFrequency' incorporates:
    *  Constant: '<S1>/Constant'
    */
-  rtY.stepperLFFrequency = 0.01;
+  rtY.stepperLFFrequency = 100.0;
 
   /* ConstCode for Outport: '<Root>/stepperLBFrequency' incorporates:
    *  Constant: '<S1>/Constant'
    */
-  rtY.stepperLBFrequency = 0.01;
+  rtY.stepperLBFrequency = 100.0;
 
   /* ConstCode for Outport: '<Root>/stepperRFFrequency' incorporates:
    *  Constant: '<S1>/Constant'
    */
-  rtY.stepperRFFrequency = 0.01;
+  rtY.stepperRFFrequency = 100.0;
 
   /* ConstCode for Outport: '<Root>/stepperRBFrequency' incorporates:
    *  Constant: '<S1>/Constant'
    */
-  rtY.stepperRBFrequency = 0.01;
+  rtY.stepperRBFrequency = 100.0;
 }
 
 /*

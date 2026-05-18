@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control_drive'.
  *
- * Model version                  : 3.41
+ * Model version                  : 3.44
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Fri May 15 12:16:49 2026
+ * C/C++ source code generated on : Mon May 18 12:31:14 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10

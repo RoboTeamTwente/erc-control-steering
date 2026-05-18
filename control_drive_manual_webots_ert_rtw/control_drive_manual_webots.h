@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control_drive_manual_webots'.
  *
- * Model version                  : 1.6
+ * Model version                  : 1.7
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Fri May 15 11:30:04 2026
+ * C/C++ source code generated on : Mon May 18 12:32:52 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Linux 64)
@@ -46,15 +46,10 @@ typedef struct {
 
 /* External inputs (root inport signals with default storage) */
 typedef struct {
-  real_T R;                            /* '<Root>/R' */
-  real_T desiredSpeed;                 /* '<Root>/desiredSpeed' */
-  real_T LFActualSpeed;                /* '<Root>/LFActualSpeed' */
-  real_T LMActualSpeed;                /* '<Root>/LMActualSpeed' */
-  real_T LBActualSpeed;                /* '<Root>/LBActualSpeed' */
-  real_T RFActualSpeed;                /* '<Root>/RFActualSpeed' */
-  real_T RMActualSpeed;                /* '<Root>/RMActualSpeed' */
-  real_T RBActualSpeed;                /* '<Root>/RBActualSpeed' */
+  real_T controllerSteering;           /* '<Root>/controllerSteering' */
+  real_T controllerSpeed;              /* '<Root>/controllerSpeed' */
   real_T deltaTime;                    /* '<Root>/deltaTime' */
+  real_T break_o;                      /* '<Root>/break' */
 } ExtU;
 
 /* External outputs (root outports fed by signals with default storage) */
@@ -115,9 +110,10 @@ extern RT_MODEL *const rtM;
  *
  * '<Root>' : 'codegen_drive_manual_webots'
  * '<S1>'   : 'codegen_drive_manual_webots/control_drive_manual_webots'
- * '<S2>'   : 'codegen_drive_manual_webots/control_drive_manual_webots/getting the steering angles and turing radii'
- * '<S3>'   : 'codegen_drive_manual_webots/control_drive_manual_webots/getting the wheel speeds from the turning radii'
- * '<S4>'   : 'codegen_drive_manual_webots/control_drive_manual_webots/setting the desired speed of the shassis'
+ * '<S2>'   : 'codegen_drive_manual_webots/control_drive_manual_webots/MATLAB Function'
+ * '<S3>'   : 'codegen_drive_manual_webots/control_drive_manual_webots/getting the steering angles and turing radii'
+ * '<S4>'   : 'codegen_drive_manual_webots/control_drive_manual_webots/getting the wheel speeds from the turning radii'
+ * '<S5>'   : 'codegen_drive_manual_webots/control_drive_manual_webots/setting the desired speed of the shassis'
  */
 #endif                                 /* control_drive_manual_webots_h_ */
 

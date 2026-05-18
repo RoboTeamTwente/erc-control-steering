@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control_drive'.
  *
- * Model version                  : 3.41
+ * Model version                  : 3.44
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Fri May 15 12:16:49 2026
+ * C/C++ source code generated on : Mon May 18 12:31:14 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -49,7 +49,7 @@ typedef struct {
   real_T R;                            /* '<Root>/R' */
   real_T desiredSpeed;                 /* '<Root>/desiredSpeed' */
   real_T deltaTime;                    /* '<Root>/deltaTime' */
-  real_T break_i;                      /* '<Root>/break' */
+  real_T break_c;                      /* '<Root>/break' */
   real_T LFActualSpeed;                /* '<Root>/LFActualSpeed' */
   real_T LMActualSpeed;                /* '<Root>/LMActualSpeed' */
   real_T LBActualSpeed;                /* '<Root>/LBActualSpeed' */
