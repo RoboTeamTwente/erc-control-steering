@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control_drive_manual'.
  *
- * Model version                  : 1.13
+ * Model version                  : 1.15
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Mon May 18 12:32:25 2026
+ * C/C++ source code generated on : Thu May 21 10:45:08 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -71,7 +71,7 @@ void control_drive_manual_step(void)
    *  Constant: '<S1>/smallest turn radius'
    *  Inport: '<Root>/controllerSteering'
    */
-  if (rtU.controllerSteering != 0.0) {
+  if (fabs(rtU.controllerSteering) < 20.0) {
     rtb_R = 0.0;
   } else {
     rtb_R = 3.0 / (rtU.controllerSteering / 2.147483647E+9);
@@ -250,22 +250,22 @@ void control_drive_manual_initialize(void)
   /* ConstCode for Outport: '<Root>/stepperLFFrequency' incorporates:
    *  Constant: '<S1>/Constant'
    */
-  rtY.stepperLFFrequency = 100.0;
+  rtY.stepperLFFrequency = 50.0;
 
   /* ConstCode for Outport: '<Root>/stepperLBFrequency' incorporates:
    *  Constant: '<S1>/Constant'
    */
-  rtY.stepperLBFrequency = 100.0;
+  rtY.stepperLBFrequency = 50.0;
 
   /* ConstCode for Outport: '<Root>/stepperRFFrequency' incorporates:
    *  Constant: '<S1>/Constant'
    */
-  rtY.stepperRFFrequency = 100.0;
+  rtY.stepperRFFrequency = 50.0;
 
   /* ConstCode for Outport: '<Root>/stepperRBFrequency' incorporates:
    *  Constant: '<S1>/Constant'
    */
-  rtY.stepperRBFrequency = 100.0;
+  rtY.stepperRBFrequency = 50.0;
 }
 
 /*
