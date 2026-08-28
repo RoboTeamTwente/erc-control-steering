@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control_drive'.
  *
- * Model version                  : 3.44
+ * Model version                  : 3.48
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Mon May 18 12:31:14 2026
+ * C/C++ source code generated on : Wed Jul  8 16:56:47 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -50,42 +50,6 @@ typedef struct {
   real_T desiredSpeed;                 /* '<Root>/desiredSpeed' */
   real_T deltaTime;                    /* '<Root>/deltaTime' */
   real_T break_c;                      /* '<Root>/break' */
-  real_T LFActualSpeed;                /* '<Root>/LFActualSpeed' */
-  real_T LMActualSpeed;                /* '<Root>/LMActualSpeed' */
-  real_T LBActualSpeed;                /* '<Root>/LBActualSpeed' */
-  real_T RFActualSpeed;                /* '<Root>/RFActualSpeed' */
-  real_T RMActualSpeed;                /* '<Root>/RMActualSpeed' */
-  real_T RBActualSpeed;                /* '<Root>/RBActualSpeed' */
-  real_T LFActualPos;                  /* '<Root>/LFActualPos' */
-  real_T LMActualPos;                  /* '<Root>/LMActualPos' */
-  real_T LBActualPos;                  /* '<Root>/LBActualPos' */
-  real_T RFActualPos;                  /* '<Root>/RFActualPos' */
-  real_T RMActualPos;                  /* '<Root>/RMActualPos' */
-  real_T RBActualPos;                  /* '<Root>/RBActualPos' */
-  real_T LFCurrent;                    /* '<Root>/LFCurrent' */
-  real_T LMCurrent;                    /* '<Root>/LMCurrent' */
-  real_T LBCurrent;                    /* '<Root>/LBCurrent' */
-  real_T RFCurrent;                    /* '<Root>/RFCurrent' */
-  real_T RMCurrent;                    /* '<Root>/RMCurrent' */
-  real_T RBCurrent;                    /* '<Root>/RBCurrent' */
-  real_T LFTemperature;                /* '<Root>/LFTemperature' */
-  real_T LMTemperature;                /* '<Root>/LMTemperature' */
-  real_T LBTemperature;                /* '<Root>/LBTemperature' */
-  real_T RFTemperature;                /* '<Root>/RFTemperature' */
-  real_T RMTemperature;                /* '<Root>/RMTemperature' */
-  real_T RBTemperature;                /* '<Root>/RBTemperature' */
-  real_T LFStatus;                     /* '<Root>/LFStatus' */
-  real_T LMStatus;                     /* '<Root>/LMStatus' */
-  real_T LBStatus;                     /* '<Root>/LBStatus' */
-  real_T RFStatus;                     /* '<Root>/RFStatus' */
-  real_T RMStatus;                     /* '<Root>/RMStatus' */
-  real_T RBStatus;                     /* '<Root>/RBStatus' */
-  real_T LFCanId;                      /* '<Root>/LFCanId' */
-  real_T LMCanId;                      /* '<Root>/LMCanId' */
-  real_T LBCanId;                      /* '<Root>/LBCanId' */
-  real_T RFCanId;                      /* '<Root>/RFCanId' */
-  real_T RMCanId;                      /* '<Root>/RMCanId' */
-  real_T RBCanId;                      /* '<Root>/RBCanId' */
 } ExtU;
 
 /* External outputs (root outports fed by signals with default storage) */
